@@ -27,6 +27,6 @@ class UserSeeder extends Seeder {
         $user->occupation = "エンジニア";
         $user->save();
 
-        User::factory()->count(50)->create();
+        User::factory()->count(100)->create();
     }
 }

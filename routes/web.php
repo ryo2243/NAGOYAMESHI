@@ -1,9 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\Auth\LoginController;
-use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,13 +23,15 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
-    Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
-    Route::post('login', [LoginController::class, 'login'])->name('login');
+    Route::get('login', [Admin\Auth\LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [Admin\Auth\LoginController::class, 'login'])->name('login');
 
-    Route::get('home', [HomeController::class, 'index'])->name('home.index');
+    Route::get('home', [Admin\HomeController::class, 'index'])->name('home.index');
 });
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin.auth'], function () {
-    Route::get('users', [UserController::class, 'index'])->name('users.index');
-    Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
+    Route::get('users', [Admin\UserController::class, 'index'])->name('users.index');
+    Route::get('users/{user}', [Admin\UserController::class, 'show'])->name('users.show');
+
+    Route::resource('restaurants', Admin\RestaurantController::class);
 });
