@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 
@@ -42,6 +43,8 @@ class RestaurantController extends Controller {
         // 何分刻みにするか（単位：分）
         $time_unit = 15;
 
+        $categories = Category::all();
+
         $variables = [
             'lowest_price_min',
             'lowest_price_max',
@@ -52,7 +55,8 @@ class RestaurantController extends Controller {
             'opening_time_end',
             'closing_time_start',
             'closing_time_end',
-            'time_unit'
+            'time_unit',
+            'categories'
         ];
 
         return view('admin.restaurants.create', compact($variables));
@@ -89,7 +93,7 @@ class RestaurantController extends Controller {
         $restaurant->seating_capacity = $request->input('seating_capacity');
         $restaurant->save();
 
-        $restaurant->categories()->sync($request->input('category_ids'));
+        $restaurant->categories()->sync(array_filter($request->input('category_ids')));
 
         return redirect()->route('admin.restaurants.index')->with('flash_message', '店舗を登録しました。');
     }
@@ -129,6 +133,8 @@ class RestaurantController extends Controller {
         // 何分刻みにするか（単位：分）
         $time_unit = 15;
 
+        $categories = Category::all();
+
         $variables = [
             'lowest_price_min',
             'lowest_price_max',
@@ -139,7 +145,8 @@ class RestaurantController extends Controller {
             'opening_time_end',
             'closing_time_start',
             'closing_time_end',
-            'time_unit'
+            'time_unit',
+            'categories'
         ];
 
         return view('admin.restaurants.edit', compact($variables));
@@ -175,7 +182,7 @@ class RestaurantController extends Controller {
         $restaurant->seating_capacity = $request->input('seating_capacity');
         $restaurant->save();
 
-        $restaurant->categories()->sync($request->input('category_ids'));
+        $restaurant->categories()->sync(array_filter($request->input('category_ids')));
 
         return redirect()->route('admin.restaurants.index')->with('flash_message', '店舗を編集しました。');
     }

@@ -47,7 +47,7 @@
                         <label for="lowest_price" class="col-md-5 col-form-label text-md-left">最低価格</label>
 
                         <div class="col-md-7">
-                            <select class="form-control nagoyameshi-login-input" id="lowest_price" name="lowest_price">  
+                            <select class="form-control form-select nagoyameshi-login-input" id="lowest_price" name="lowest_price">  
                                 <option hidden>選択してください</option>                              
                                 @for ($i = 0; $i <= ($lowest_price_max - $lowest_price_min) / $price_unit; $i++)
                                     {{ $lowest_price = $lowest_price_min + ($price_unit * $i) }}
@@ -65,7 +65,7 @@
                         <label for="highest_price" class="col-md-5 col-form-label text-md-left">最高価格</label>
 
                         <div class="col-md-7">
-                            <select class="form-control nagoyameshi-login-input" id="highest_price" name="highest_price">
+                            <select class="form-control form-select nagoyameshi-login-input" id="highest_price" name="highest_price">
                                 <option hidden>選択してください</option>
                                 @for ($i = 0; $i <= ($highest_price_max - $highest_price_min) / $price_unit; $i++)
                                     {{ $highest_price = $highest_price_min + ($price_unit * $i) }}
@@ -99,7 +99,7 @@
                         <label for="opening_time" class="col-md-5 col-form-label text-md-left">開店時間</label>
 
                         <div class="col-md-7">
-                            <select class="form-control nagoyameshi-login-input" id="opening_time" name="opening_time">
+                            <select class="form-control form-select nagoyameshi-login-input" id="opening_time" name="opening_time">
                                 <option hidden>選択してください</option>
                                 @for ($i = $opening_time_start * (60 / $time_unit); $i < $opening_time_end * (60 / $time_unit); $i++)
                                     {{ $opening_time = date('H:i', strtotime('00:00 +' . $i * $time_unit .' minute')) }}
@@ -117,7 +117,7 @@
                         <label for="closing_time" class="col-md-5 col-form-label text-md-left">閉店時間</label>
 
                         <div class="col-md-7">
-                            <select class="form-control nagoyameshi-login-input" id="closing_time" name="closing_time">
+                            <select class="form-control form-select nagoyameshi-login-input" id="closing_time" name="closing_time">
                                 <option hidden>選択してください</option>
                                 @for ($i = $closing_time_start * (60 / $time_unit); $i < $closing_time_end * (60 / $time_unit); $i++)
                                     {{ $closing_time = date('H:i', strtotime('00:00 +' . $i * $time_unit .' minute')) }}
@@ -138,6 +138,25 @@
                             <input type="number" class="form-control nagoyameshi-login-input" id="seating_capacity" name="seating_capacity" value="{{ old('seating_capacity') }}">
                         </div>
                     </div>
+
+                    @for ($i = 0; $i < 3; $i++)
+                        <div class="form-group row">
+                            <label for="category{{ $i + 1 }}" class="col-md-5 col-form-label text-md-left">カテゴリ{{ $i + 1 }}（3つまで選択可）</label>
+
+                            <div class="col-md-7">
+                                <select class="form-control form-select nagoyameshi-login-input" id="category{{ $i + 1 }}" name="category_ids[]">  
+                                    <option value="">選択なし</option>                              
+                                    @foreach ($categories as $category)                                        
+                                        @if ($category->id == old("category_ids.{$i}"))                                        
+                                            <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                                        @else
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endif
+                                    @endforeach                              
+                                </select>                            
+                            </div>
+                        </div>
+                    @endfor                     
 
                     <div class="form-group">
                         <button type="submit" class="btn nagoyameshi-submit-button w-100">登録</button>
