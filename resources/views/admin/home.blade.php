@@ -17,6 +17,7 @@
                     {{ __('You are logged in!') }}
                     <a href="{{ route('admin.users.index') }}">ユーザー一覧</a>
                     <a href="{{ route('admin.restaurants.index') }}">店舗一覧</a>
+                    <a href="{{ route('admin.categories.index') }}">カテゴリ一覧</a>
                 </div>
             </div>
         </div>

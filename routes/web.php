@@ -22,6 +22,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// 管理者用のルーティング（ミドルウェアによる認証がコントローラ内で行われているものをグループ化）
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('login', [Admin\Auth\LoginController::class, 'showLoginForm'])->name('login');
     Route::post('login', [Admin\Auth\LoginController::class, 'login'])->name('login');
@@ -29,9 +30,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('home', [Admin\HomeController::class, 'index'])->name('home.index');
 });
 
+// 管理者用のルーティング（ミドルウェアによる認証がコントローラ内で行われていないものをグループ化）
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin.auth'], function () {
     Route::get('users', [Admin\UserController::class, 'index'])->name('users.index');
     Route::get('users/{user}', [Admin\UserController::class, 'show'])->name('users.show');
 
     Route::resource('restaurants', Admin\RestaurantController::class);
+    Route::resource('categories', Admin\CategoryController::class)->only(['index', 'store', 'update', 'destroy']);
 });
