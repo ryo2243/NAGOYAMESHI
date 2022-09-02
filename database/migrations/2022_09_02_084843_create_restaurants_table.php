@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->text('description');
             $table->integer('lowest_price')->unsigned();
             $table->integer('highest_price')->unsigned();
+            $table->string('postal_code');
             $table->string('address');
             $table->time('opening_time');
             $table->time('closing_time');

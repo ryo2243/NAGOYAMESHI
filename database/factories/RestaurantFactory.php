@@ -24,6 +24,7 @@ class RestaurantFactory extends Factory {
             'description' => $this->faker->realText,
             'lowest_price' => $dummy_lowest_price,
             'highest_price' => $dummy_lowest_price + 2000,
+            'postal_code' => $this->faker->postcode,
             'address' => $this->faker->prefecture . ' ' . $this->faker->city . $this->faker->streetAddress . ' ' . $this->faker->secondaryAddress,
             'opening_time' => $dummy_opening_time,
             'closing_time' => date('H:i:s', strtotime("{$dummy_opening_time} +8 hour")),

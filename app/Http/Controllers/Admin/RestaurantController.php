@@ -24,7 +24,38 @@ class RestaurantController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        return view('admin.restaurants.create');
+        // 最低価格と最高価格のセレクトボックスの範囲
+        $lowest_price_min = 500;
+        $lowest_price_max = 10000;
+        $highest_price_min = 500;
+        $highest_price_max = 10000;
+
+        // 何円刻みにするか
+        $price_unit = 500;
+
+        // 開店時間と閉店時間のセレクトボックスの範囲（単位：時）
+        $opening_time_start = 0;
+        $opening_time_end = 24;
+        $closing_time_start = 0;
+        $closing_time_end = 24;
+
+        // 何分刻みにするか（単位：分）
+        $time_unit = 15;
+
+        $variables = [
+            'lowest_price_min',
+            'lowest_price_max',
+            'highest_price_min',
+            'highest_price_max',
+            'price_unit',
+            'opening_time_start',
+            'opening_time_end',
+            'closing_time_start',
+            'closing_time_end',
+            'time_unit'
+        ];
+
+        return view('admin.restaurants.create', compact($variables));
     }
 
     /**
@@ -37,12 +68,13 @@ class RestaurantController extends Controller {
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'lowest_price' => 'required|min:0|lte:highest_price',
-            'highest_price' => 'required|min:0|gte:lowest_price',
+            'lowest_price' => 'required|numeric|min:0|lte:highest_price',
+            'highest_price' => 'required|numeric|min:0|gte:lowest_price',
+            'postal_code' => 'required|digits:7',
             'address' => 'required',
-            'opening_time' => 'required|date|before:closing_time',
-            'closing_time' => 'required|date|after:opening_time',
-            'seating_capacity' => 'required|min:0',
+            'opening_time' => 'required|before:closing_time',
+            'closing_time' => 'required|after:opening_time',
+            'seating_capacity' => 'required|numeric|min:0',
         ]);
 
         $restaurant = new Restaurant();
@@ -50,6 +82,7 @@ class RestaurantController extends Controller {
         $restaurant->description = $request->input('description');
         $restaurant->lowest_price = $request->input('lowest_price');
         $restaurant->highest_price = $request->input('highest_price');
+        $restaurant->postal_code = $request->input('postal_code');
         $restaurant->address = $request->input('address');
         $restaurant->opening_time = $request->input('opening_time');
         $restaurant->closing_time = $request->input('closing_time');
@@ -78,7 +111,38 @@ class RestaurantController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit(Restaurant $restaurant) {
-        return view('admin.restaurants.edit', compact('restaurant'));
+        // 最低価格と最高価格のセレクトボックスの範囲
+        $lowest_price_min = 500;
+        $lowest_price_max = 10000;
+        $highest_price_min = 500;
+        $highest_price_max = 10000;
+
+        // 何円刻みにするか
+        $price_unit = 500;
+
+        // 開店時間と閉店時間のセレクトボックスの範囲（単位：時）
+        $opening_time_start = 0;
+        $opening_time_end = 24;
+        $closing_time_start = 0;
+        $closing_time_end = 24;
+
+        // 何分刻みにするか（単位：分）
+        $time_unit = 15;
+
+        $variables = [
+            'lowest_price_min',
+            'lowest_price_max',
+            'highest_price_min',
+            'highest_price_max',
+            'price_unit',
+            'opening_time_start',
+            'opening_time_end',
+            'closing_time_start',
+            'closing_time_end',
+            'time_unit'
+        ];
+
+        return view('admin.restaurants.edit', compact($variables));
     }
 
     /**
@@ -92,12 +156,13 @@ class RestaurantController extends Controller {
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'lowest_price' => 'required|min:0|lte:highest_price',
-            'highest_price' => 'required|min:0|gte:lowest_price',
+            'lowest_price' => 'required|numeric|min:0|lte:highest_price',
+            'highest_price' => 'required|numeric|min:0|gte:lowest_price',
+            'postal_code' => 'required|digits:7',
             'address' => 'required',
-            'opening_time' => 'required|date|before:closing_time',
-            'closing_time' => 'required|date|after:opening_time',
-            'seating_capacity' => 'required|min:0',
+            'opening_time' => 'required|before:closing_time',
+            'closing_time' => 'required|after:opening_time',
+            'seating_capacity' => 'required|numeric|min:0',
         ]);
 
         $restaurant->name = $request->input('name');
