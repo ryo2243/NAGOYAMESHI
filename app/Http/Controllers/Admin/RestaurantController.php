@@ -34,7 +34,31 @@ class RestaurantController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'lowest_price' => 'required|min:0|lte:highest_price',
+            'highest_price' => 'required|min:0|gte:lowest_price',
+            'address' => 'required',
+            'opening_time' => 'required|date|before:closing_time',
+            'closing_time' => 'required|date|after:opening_time',
+            'seating_capacity' => 'required|min:0',
+        ]);
+
+        $restaurant = new Restaurant();
+        $restaurant->name = $request->input('name');
+        $restaurant->description = $request->input('description');
+        $restaurant->lowest_price = $request->input('lowest_price');
+        $restaurant->highest_price = $request->input('highest_price');
+        $restaurant->address = $request->input('address');
+        $restaurant->opening_time = $request->input('opening_time');
+        $restaurant->closing_time = $request->input('closing_time');
+        $restaurant->seating_capacity = $request->input('seating_capacity');
+        $restaurant->save();
+
+        $restaurant->categories()->sync($request->input('category_ids'));
+
+        return redirect()->route('admin.restaurants.index')->with('flash_message', '店舗を登録しました。');
     }
 
     /**
@@ -65,7 +89,30 @@ class RestaurantController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Restaurant $restaurant) {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'lowest_price' => 'required|min:0|lte:highest_price',
+            'highest_price' => 'required|min:0|gte:lowest_price',
+            'address' => 'required',
+            'opening_time' => 'required|date|before:closing_time',
+            'closing_time' => 'required|date|after:opening_time',
+            'seating_capacity' => 'required|min:0',
+        ]);
+
+        $restaurant->name = $request->input('name');
+        $restaurant->description = $request->input('description');
+        $restaurant->lowest_price = $request->input('lowest_price');
+        $restaurant->highest_price = $request->input('highest_price');
+        $restaurant->address = $request->input('address');
+        $restaurant->opening_time = $request->input('opening_time');
+        $restaurant->closing_time = $request->input('closing_time');
+        $restaurant->seating_capacity = $request->input('seating_capacity');
+        $restaurant->save();
+
+        $restaurant->categories()->sync($request->input('category_ids'));
+
+        return redirect()->route('admin.restaurants.index')->with('flash_message', '店舗を編集しました。');
     }
 
     /**
@@ -77,6 +124,6 @@ class RestaurantController extends Controller {
     public function destroy(Restaurant $restaurant) {
         $restaurant->delete();
 
-        return redirect()->route('admin.restaurants.index');
+        return redirect()->route('admin.restaurants.index')->with('flash_message', '店舗を削除しました。');
     }
 }
