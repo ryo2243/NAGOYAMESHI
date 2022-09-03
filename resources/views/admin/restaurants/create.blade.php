@@ -4,15 +4,19 @@
     <link href="{{ asset('/css/nagoyameshi.css') }}" rel="stylesheet">
 @endpush
 
+@push('scripts')
+    <script src="{{ asset('/js/preview.js') }}"></script>
+@endpush
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-5">
-                <h3 class="mt-3 mb-3">店舗登録</h3>
+            <div class="col-xxl-5 col-xl-6 col-lg-7 col-md-9">
+                <h1 class="mt-3 mb-3 text-center fs-4">店舗登録</h1>
+                
+                <hr class="mb-4">
 
-                <hr>
-
-                <a href="{{ route('admin.restaurants.index') }}">戻る</a>    
+                <!-- <a href="{{ route('admin.restaurants.index') }}">&lt; 戻る</a> -->
 
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -24,27 +28,38 @@
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('admin.restaurants.store') }}">
+                <form method="POST" action="{{ route('admin.restaurants.store') }}" enctype="multipart/form-data">
                     @csrf
 
-                    <div class="form-group row">
-                        <label for="name" class="col-md-5 col-form-label text-md-left">店舗名</label>
+                    <div class="form-group row mb-3">
+                        <label for="name" class="col-md-5 col-form-label text-md-left fw-bold">店舗名</label>
 
                         <div class="col-md-7">
                             <input type="text" class="form-control nagoyameshi-login-input" id="name" name="name" value="{{ old('name') }}">
                         </div>
-                    </div>
+                    </div> 
 
-                    <div class="form-group row">
-                        <label for="description" class="col-md-5 col-form-label text-md-left">説明</label>
+                    <div class="form-group row mb-3">
+                        <label for="image" class="col-md-5 col-form-label text-md-left fw-bold">店舗画像</label>
+                        
+                        <div class="col-md-7">
+                            <input type="file" class="form-control nagoyameshi-login-input" id="image" name="image">
+                        </div>
+                    </div>   
+                    
+                    <!-- 選択された画像の表示場所 -->
+                    <div class="row" id="imagePreview"></div>  
+
+                    <div class="form-group row mb-3">
+                        <label for="description" class="col-md-5 col-form-label text-md-left fw-bold">説明</label>
 
                         <div class="col-md-7">
-                            <textarea class="form-control nagoyameshi-login-input" id="description" name="description" cols="30" rows="10">{{ old('description') }}</textarea>                            
+                            <textarea class="form-control nagoyameshi-login-input" id="description" name="description" cols="30" rows="5">{{ old('description') }}</textarea>                            
                         </div>
                     </div> 
                     
-                    <div class="form-group row">
-                        <label for="lowest_price" class="col-md-5 col-form-label text-md-left">最低価格</label>
+                    <div class="form-group row mb-3">
+                        <label for="lowest_price" class="col-md-5 col-form-label text-md-left fw-bold">最低価格</label>
 
                         <div class="col-md-7">
                             <select class="form-control form-select nagoyameshi-login-input" id="lowest_price" name="lowest_price">  
@@ -61,8 +76,8 @@
                         </div>
                     </div> 
                     
-                    <div class="form-group row">
-                        <label for="highest_price" class="col-md-5 col-form-label text-md-left">最高価格</label>
+                    <div class="form-group row mb-3">
+                        <label for="highest_price" class="col-md-5 col-form-label text-md-left fw-bold">最高価格</label>
 
                         <div class="col-md-7">
                             <select class="form-control form-select nagoyameshi-login-input" id="highest_price" name="highest_price">
@@ -79,24 +94,24 @@
                         </div>
                     </div>                     
 
-                    <div class="form-group row">
-                        <label for="postal_code" class="col-md-5 col-form-label text-md-left">郵便番号</label>
+                    <div class="form-group row mb-3">
+                        <label for="postal_code" class="col-md-5 col-form-label text-md-left fw-bold">郵便番号</label>
 
                         <div class="col-md-7">
                             <input type="text" class="form-control nagoyameshi-login-input" id="postal_code" name="postal_code" value="{{ old('postal_code') }}">
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label for="address" class="col-md-5 col-form-label text-md-left">住所</label>
+                    <div class="form-group row mb-3">
+                        <label for="address" class="col-md-5 col-form-label text-md-left fw-bold">住所</label>
 
                         <div class="col-md-7">
                             <input type="text" class="form-control nagoyameshi-login-input" id="address" name="address" value="{{ old('address') }}">
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label for="opening_time" class="col-md-5 col-form-label text-md-left">開店時間</label>
+                    <div class="form-group row mb-3">
+                        <label for="opening_time" class="col-md-5 col-form-label text-md-left fw-bold">開店時間</label>
 
                         <div class="col-md-7">
                             <select class="form-control form-select nagoyameshi-login-input" id="opening_time" name="opening_time">
@@ -113,8 +128,8 @@
                         </div>
                     </div> 
                     
-                    <div class="form-group row">
-                        <label for="closing_time" class="col-md-5 col-form-label text-md-left">閉店時間</label>
+                    <div class="form-group row mb-3">
+                        <label for="closing_time" class="col-md-5 col-form-label text-md-left fw-bold">閉店時間</label>
 
                         <div class="col-md-7">
                             <select class="form-control form-select nagoyameshi-login-input" id="closing_time" name="closing_time">
@@ -131,8 +146,8 @@
                         </div>
                     </div>                     
 
-                    <div class="form-group row">
-                        <label for="seating_capacity" class="col-md-5 col-form-label text-md-left">座席数</label>
+                    <div class="form-group row mb-3">
+                        <label for="seating_capacity" class="col-md-5 col-form-label text-md-left fw-bold">座席数</label>
 
                         <div class="col-md-7">
                             <input type="number" class="form-control nagoyameshi-login-input" id="seating_capacity" name="seating_capacity" value="{{ old('seating_capacity') }}">
@@ -140,8 +155,8 @@
                     </div>
 
                     @for ($i = 0; $i < 3; $i++)
-                        <div class="form-group row">
-                            <label for="category{{ $i + 1 }}" class="col-md-5 col-form-label text-md-left">カテゴリ{{ $i + 1 }}（3つまで選択可）</label>
+                        <div class="form-group row mb-3">
+                            <label for="category{{ $i + 1 }}" class="col-md-5 col-form-label text-md-left fw-bold">カテゴリ{{ $i + 1 }}（3つまで選択可）</label>
 
                             <div class="col-md-7">
                                 <select class="form-control form-select nagoyameshi-login-input" id="category{{ $i + 1 }}" name="category_ids[]">  
@@ -156,10 +171,12 @@
                                 </select>                            
                             </div>
                         </div>
-                    @endfor                     
+                    @endfor   
+                    
+                    <hr class="my-4">
 
-                    <div class="form-group">
-                        <button type="submit" class="btn nagoyameshi-submit-button w-100">登録</button>
+                    <div class="form-group d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary text-white w-50">登録</button>
                     </div>
                 </form>
             </div>

@@ -19,7 +19,7 @@
                         <input type="text" class="form-control" name="name">
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">登録</button>
+                        <button type="submit" class="btn btn-primary text-white">登録</button>
                     </div>
                 </form>
             </div>
@@ -41,7 +41,7 @@
                         <input type="text" class="form-control" name="name" value="">
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">更新</button>
+                        <button type="submit" class="btn btn-primary text-white">更新</button>
                     </div>   
                 </form>             
             </div>
@@ -60,7 +60,7 @@
                     <form action="" method="post" name="deleteCategoryForm">
                         @csrf
                         @method('delete')
-                        <button type="submit" class="btn btn-danger">削除</button>
+                        <button type="submit" class="btn btn-danger text-white">削除</button>
                     </form>
                 </div>
             </div>

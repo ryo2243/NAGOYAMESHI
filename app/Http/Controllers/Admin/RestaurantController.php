@@ -83,6 +83,12 @@ class RestaurantController extends Controller {
 
         $restaurant = new Restaurant();
         $restaurant->name = $request->input('name');
+        if ($request->hasFile('image')) {
+            $image = $request->file('image')->store('public/restaurants');
+            $restaurant->image = basename($image);
+        } else {
+            $restaurant->image = '';
+        }
         $restaurant->description = $request->input('description');
         $restaurant->lowest_price = $request->input('lowest_price');
         $restaurant->highest_price = $request->input('highest_price');
@@ -173,6 +179,12 @@ class RestaurantController extends Controller {
         ]);
 
         $restaurant->name = $request->input('name');
+        if ($request->hasFile('image')) {
+            $image = $request->file('image')->store('public/restaurants');
+            $restaurant->image = basename($image);
+        } else {
+            $restaurant->image = '';
+        }
         $restaurant->description = $request->input('description');
         $restaurant->lowest_price = $request->input('lowest_price');
         $restaurant->highest_price = $request->input('highest_price');
