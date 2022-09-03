@@ -5,12 +5,19 @@
   box-sizing: border-box;
 }
 
-.nagoyameshi-header {
-  background-color: #F2B705;
+.nagoyameshi-logo {
+  height: 24px;  
 }
 
 .app-name {
-  color: #592115;
+  font-family: 'Carter One', cursive;
+  font-size: 24px;
+  color: #191919;
+}
+
+.app-name:hover {
+  color: #191919;
+  opacity: 0.9;
 }
 
 .nagoyameshi-footer {

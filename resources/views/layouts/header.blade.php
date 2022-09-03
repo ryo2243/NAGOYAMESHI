@@ -1,7 +1,10 @@
-<nav class="navbar navbar-expand-md navbar-light shadow-sm nagoyameshi-header">
+<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand app-name" href="{{ url('/') }}">
-            {{ config('app.name', 'Laravel') }}
+            <div class="d-flex align-items-center">
+                <img class="nagoyameshi-logo me-1" src ="{{ asset('/images/logo.svg') }}" alt="nagoyameshi">
+                {{ config('app.name', 'Laravel') }}
+            </div>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
@@ -26,6 +29,7 @@
                             <a class="dropdown-item" href="{{ route('admin.users.index') }}">会員一覧</a>
                             <a class="dropdown-item" href="{{ route('admin.restaurants.index') }}">店舗一覧</a>
                             <a class="dropdown-item" href="{{ route('admin.categories.index') }}">カテゴリ一覧</a>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
