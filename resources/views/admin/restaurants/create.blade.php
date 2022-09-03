@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@push('styles')
-    <link href="{{ asset('/css/nagoyameshi.css') }}" rel="stylesheet">
-@endpush
-
 @push('scripts')
     <script src="{{ asset('/js/preview.js') }}"></script>
 @endpush
@@ -175,7 +171,7 @@
                     
                     <hr class="my-4">
 
-                    <div class="form-group d-flex justify-content-center">
+                    <div class="form-group d-flex justify-content-center mb-4">
                         <button type="submit" class="btn btn-primary text-white w-50">登録</button>
                     </div>
                 </form>
