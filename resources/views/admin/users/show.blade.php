@@ -3,12 +3,131 @@
 @section('content')
     <div class="col container">
         <div class="row justify-content-center">
-            <h1>会員詳細</h1>                  
-            <div>
-                {{ $user->id }}
-                {{ $user->name }}
-                {{ $user->email }}                        
-            </div>     
+            <div class="col-xxl-6 col-xl-7 col-lg-8 col-md-9">
+                <h1 class="mt-3 mb-3 text-center fs-4">{{ $user->name }}</h1>            
+
+
+                <div class="d-flex justify-content-between align-items-end mb-3">
+                    <a href="{{ route('admin.users.index') }}">&lt; 戻る</a>
+                </div> 
+
+                <div class="container">
+                    <div class="row pb-2 mb-2 border-bottom">
+                        <div class="col-3">
+                            <span class="fw-bold">ID</span>          
+                        </div>                                                  
+
+                        <div class="col">
+                            <span>{{ $user->id }}</span>
+                        </div>
+                    </div>
+
+                    <div class="row pb-2 mb-2 border-bottom">
+                        <div class="col-3">
+                            <span class="fw-bold">氏名</span>
+                        </div>
+
+                        <div class="col">
+                            <span>{{ $user->name }}</span>
+                        </div>
+                    </div>                    
+
+                    <div class="row pb-2 mb-2 border-bottom">
+                        <div class="col-3">
+                            <span class="fw-bold">フリガナ</span>
+                        </div>
+
+                        <div class="col">
+                            <span>{{ $user->kana }}</span>
+                        </div>
+                    </div>
+
+                    <div class="row pb-2 mb-2 border-bottom">
+                        <div class="col-3">
+                            <span class="fw-bold">メールアドレス</span>
+                        </div>
+
+                        <div class="col">
+                            <span>{{ $user->email }}</span>
+                        </div>
+                    </div> 
+                    
+                    <div class="row pb-2 mb-2 border-bottom">
+                        <div class="col-3">
+                            <span class="fw-bold">郵便番号</span>
+                        </div>
+
+                        <div class="col">
+                            <span>{{ substr($user->postal_code, 0, 3) . '-' . substr($user->postal_code, 3) }}</span>
+                        </div>
+                    </div>   
+                    
+                    <div class="row pb-2 mb-2 border-bottom">
+                        <div class="col-3">
+                            <span class="fw-bold">住所</span>
+                        </div>
+
+                        <div class="col">
+                            <span>{{ $user->address }}</span>
+                        </div>
+                    </div>
+
+                    <div class="row pb-2 mb-2 border-bottom">
+                        <div class="col-3">
+                            <span class="fw-bold">電話番号</span>
+                        </div>
+
+                        <div class="col">
+                            <span>{{ $user->phone_number }}</span>
+                        </div>
+                    </div>                    
+                    
+                    <div class="row pb-2 mb-2 border-bottom">
+                        <div class="col-3">
+                            <span class="fw-bold">誕生日</span>
+                        </div>
+
+                        <div class="col">
+                            <span>
+                                @if ($user->birthday !== null)
+                                    {{ date('n月j日', strtotime($user->birthday)) }}
+                                @else
+                                    未設定
+                                @endif                            
+                            </span>
+                        </div>
+                    </div> 
+
+                    <div class="row pb-2 mb-2 border-bottom">
+                        <div class="col-3">
+                            <span class="fw-bold">職業</span>
+                        </div>
+
+                        <div class="col">
+                            <span>
+                                @if ($user->occupation !== null)
+                                    {{ $user->occupation }}
+                                @else
+                                    未設定
+                                @endif                            
+                            </span>
+                        </div>
+                    </div> 
+                    
+                    <div class="row pb-2 mb-2 border-bottom">
+                        <div class="col-3">
+                            <span class="fw-bold">会員種別</span>
+                        </div>
+
+                        <div class="col">
+                            <span>
+                                <!-- 課金システム実装後、ここにif文 -->
+                                未設定
+                            </span>
+                        </div>
+                    </div>                    
+                </div>                                               
+            </div>                          
         </div>
-    </div>   
+    </div>       
 @endsection
