@@ -23,7 +23,16 @@
         @include('layouts.header')
 
         <main class="py-4 content">
-            @yield('content')
+            @if (Auth::guard('admin')->check())
+                <div class="container">
+                    <div class="row justify-content-center">
+                        @include('layouts.sidebar')
+                        @yield('content')
+                    </div>
+                </div>
+            @else
+                @yield('content')
+            @endif
         </main>
 
         @include('layouts.footer')

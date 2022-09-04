@@ -27,7 +27,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('login', [Admin\Auth\LoginController::class, 'showLoginForm'])->name('login');
     Route::post('login', [Admin\Auth\LoginController::class, 'login'])->name('login');
 
-    Route::get('home', [Admin\HomeController::class, 'index'])->name('home.index');
+    Route::get('home', [Admin\HomeController::class, 'index'])->name('home');
 });
 
 // 管理者用のルーティング（ミドルウェアによる認証がコントローラ内で行われていないものをグループ化）

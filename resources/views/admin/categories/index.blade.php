@@ -67,20 +67,22 @@
         </div>
     </div>
 
-    @if (session('flash_message'))
-        <p class="text-success">{{ session('flash_message') }}</p>
-    @endif    
+    <div class="col">
+        @if (session('flash_message'))
+            <p class="text-success">{{ session('flash_message') }}</p>
+        @endif    
 
-    <h1>カテゴリ一覧</h1>
-    <a href="#" data-bs-toggle="modal" data-bs-target="#createCategoryModal">新規登録</a>      
-    @foreach($categories as $category)    
-        <div>
-            {{ $category->id }}
-            {{ $category->name }}        
-            <a href="#" data-bs-toggle="modal" data-bs-target="#editCategoryModal" data-category-id="{{ $category->id }}" data-category-name="{{ $category->name }}">編集</a>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal" data-category-id="{{ $category->id }}" data-category-name="{{ $category->name }}">削除</a>             
-        </div>
-    @endforeach
+        <h1>カテゴリ一覧</h1>
+        <a href="#" data-bs-toggle="modal" data-bs-target="#createCategoryModal">新規登録</a>      
+        @foreach($categories as $category)    
+            <div>
+                {{ $category->id }}
+                {{ $category->name }}        
+                <a href="#" data-bs-toggle="modal" data-bs-target="#editCategoryModal" data-category-id="{{ $category->id }}" data-category-name="{{ $category->name }}">編集</a>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal" data-category-id="{{ $category->id }}" data-category-name="{{ $category->name }}">削除</a>             
+            </div>
+        @endforeach
 
-    {{ $categories->links() }}
+        {{ $categories->links() }}
+    </div>
 @endsection

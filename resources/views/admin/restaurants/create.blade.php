@@ -4,10 +4,10 @@
     <script src="{{ asset('/js/preview.js') }}"></script>
 @endpush
 
-@section('content')
-    <div class="container">
+@section('content')   
+    <div class="col container">
         <div class="row justify-content-center">
-            <div class="col-xxl-5 col-xl-6 col-lg-7 col-md-9">
+            <div class="col-xxl-6 col-xl-7 col-lg-8 col-md-9">
                 <h1 class="mt-3 mb-3 text-center fs-4">店舗登録</h1>
                 
                 <hr class="mb-4">
@@ -176,6 +176,6 @@
                     </div>
                 </form>
             </div>
-        </div>
-    </div>                
+        </div>     
+    </div>             
 @endsection

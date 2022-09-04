@@ -27,6 +27,16 @@
   bottom: 0;  
 }
 
+@media screen and (max-width: 991px) {
+  .admin-sidebar {
+    display: none;
+  }
+
+  .admin-content {
+    margin: 0;
+  }
+}
+
 /*
 h1 {  
   font-size: 26px;
