@@ -67,22 +67,62 @@
         </div>
     </div>
 
-    <div class="col">
-        @if (session('flash_message'))
-            <p class="text-success">{{ session('flash_message') }}</p>
-        @endif    
+    <div class="col container">
+        <div class="row justify-content-center">
+            <div class="col-xxl-6 col-xl-7 col-lg-8 col-md-9">        
+                <h1 class="mt-3 mb-3 text-center fs-4">カテゴリ一覧</h1>
+                
+                @if (session('flash_message'))
+                    <div class="alert alert-info" role="alert">
+                        <p class="mb-0">{{ session('flash_message') }}</p>
+                    </div>
+                @endif   
+                
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif                
 
-        <h1>カテゴリ一覧</h1>
-        <a href="#" data-bs-toggle="modal" data-bs-target="#createCategoryModal">新規登録</a>      
-        @foreach($categories as $category)    
-            <div>
-                {{ $category->id }}
-                {{ $category->name }}        
-                <a href="#" data-bs-toggle="modal" data-bs-target="#editCategoryModal" data-category-id="{{ $category->id }}" data-category-name="{{ $category->name }}">編集</a>
-                <a href="#" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal" data-category-id="{{ $category->id }}" data-category-name="{{ $category->name }}">削除</a>             
+                <div class="d-flex justify-content-between align-items-end mb-3">
+                    <p class="mb-0">計{{$total}}件</p>
+
+                    <a href="#" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#createCategoryModal">＋ 新規登録</a>
+                </div>                    
+                
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">カテゴリ名</th>                            
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>   
+                    <tbody> 
+                        @foreach($categories as $category)    
+                            <tr>
+                                <td>{{ $category->id }}</td>
+                                <td>{{ $category->name }}</td>
+                                <td>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#editCategoryModal" data-category-id="{{ $category->id }}" data-category-name="{{ $category->name }}">編集</a>
+                                </td>
+                                <td>
+                                    <a href="#" class="link-secondary" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal" data-category-id="{{ $category->id }}" data-category-name="{{ $category->name }}">削除</a>
+                                </td>         
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>                           
+
+                <div class="d-flex justify-content-center">
+                    {{ $categories->links() }}
+                </div>
             </div>
-        @endforeach
-
-        {{ $categories->links() }}
+        </div>        
     </div>
 @endsection

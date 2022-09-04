@@ -9,8 +9,9 @@ use App\Models\User;
 class UserController extends Controller {
     public function index() {
         $users = User::paginate(15);
+        $total = User::count();
 
-        return view('admin.users.index', compact('users'));
+        return view('admin.users.index', compact('users', 'total'));
     }
 
     public function show(User $user) {

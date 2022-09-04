@@ -29,6 +29,9 @@
                             <a class="dropdown-item" href="{{ route('admin.users.index') }}">会員一覧</a>
                             <a class="dropdown-item" href="{{ route('admin.restaurants.index') }}">店舗一覧</a>
                             <a class="dropdown-item" href="{{ route('admin.categories.index') }}">カテゴリ一覧</a>
+                            <a class="dropdown-item" href="#">会社情報</a>
+                            <a class="dropdown-item" href="#">会員規約</a>
+                            <a class="dropdown-item" href="#">売上集計</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();

@@ -15,7 +15,7 @@ class RestaurantController extends Controller {
      */
     public function index() {
         $restaurants = Restaurant::paginate(15);
-        $total = Restaurant::all()->count();
+        $total = Restaurant::count();
 
         return view('admin.restaurants.index', compact('restaurants', 'total'));
     }

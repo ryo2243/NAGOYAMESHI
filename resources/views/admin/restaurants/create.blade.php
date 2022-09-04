@@ -10,13 +10,11 @@
             <div class="col-xxl-6 col-xl-7 col-lg-8 col-md-9">
                 <h1 class="mt-3 mb-3 text-center fs-4">店舗登録</h1>
                 
-                <hr class="mb-4">
-
-                <!-- <a href="{{ route('admin.restaurants.index') }}">&lt; 戻る</a> -->
+                <hr class="mb-4">                
 
                 @if ($errors->any())
                     <div class="alert alert-danger">
-                        <ul>
+                        <ul class="mb-0">
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
