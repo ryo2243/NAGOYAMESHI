@@ -13,7 +13,7 @@
                     <form action="{{ route('admin.restaurants.destroy', $restaurant) }}" method="post">
                         @csrf
                         @method('delete')
-                        <button type="submit" class="btn btn-danger text-white">削除</button>
+                        <button type="submit" class="btn btn-danger text-white shadow-sm">削除</button>
                     </form>
                 </div>
             </div>
@@ -23,14 +23,14 @@
     <div class="col container">
         <div class="row justify-content-center">
             <div class="col-xl-7 col-lg-8 col-md-9">
-                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <nav class="mb-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">                        
                         <li class="breadcrumb-item"><a href="{{ route('admin.restaurants.index') }}">店舗一覧</a></li>
                         <li class="breadcrumb-item active" aria-current="page">店舗詳細</li>
                     </ol>
                 </nav> 
 
-                <h1 class="mt-3 mb-3 text-center fs-4">{{ $restaurant->name }}</h1>               
+                <h1 class="mb-3 text-center fs-4">{{ $restaurant->name }}</h1>               
 
                 <div class="d-flex justify-content-end align-items-end mb-3">                    
                     <div>

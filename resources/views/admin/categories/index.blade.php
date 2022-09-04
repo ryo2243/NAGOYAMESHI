@@ -19,7 +19,7 @@
                         <input type="text" class="form-control" name="name">
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary text-white">登録</button>
+                        <button type="submit" class="btn btn-primary text-white shadow-sm">登録</button>
                     </div>
                 </form>
             </div>
@@ -41,7 +41,7 @@
                         <input type="text" class="form-control" name="name" value="">
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary text-white">更新</button>
+                        <button type="submit" class="btn btn-primary text-white shadow-sm">更新</button>
                     </div>   
                 </form>             
             </div>
@@ -60,7 +60,7 @@
                     <form action="" method="post" name="deleteCategoryForm">
                         @csrf
                         @method('delete')
-                        <button type="submit" class="btn btn-danger text-white">削除</button>
+                        <button type="submit" class="btn btn-danger text-white shadow-sm">削除</button>
                     </form>
                 </div>
             </div>
@@ -70,7 +70,13 @@
     <div class="col container">
         <div class="row justify-content-center">
             <div class="col-xl-7 col-lg-8 col-md-9">  
-                <h1 class="mt-3 mb-3 text-center fs-4">カテゴリ一覧</h1>
+                <h1 class="mb-3 text-center fs-4">カテゴリ一覧</h1>                           
+
+                <div class="d-flex justify-content-between align-items-end mb-3">
+                    <p class="mb-0">計{{$total}}件</p>
+
+                    <a href="#" class="btn btn-primary text-white shadow-sm" data-bs-toggle="modal" data-bs-target="#createCategoryModal">＋ 新規登録</a>
+                </div>  
                 
                 @if (session('flash_message'))
                     <div class="alert alert-info" role="alert">
@@ -86,13 +92,7 @@
                             @endforeach
                         </ul>
                     </div>
-                @endif                
-
-                <div class="d-flex justify-content-between align-items-end mb-3">
-                    <p class="mb-0">計{{$total}}件</p>
-
-                    <a href="#" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#createCategoryModal">＋ 新規登録</a>
-                </div>                    
+                @endif                 
                 
                 <table class="table table-hover">
                     <thead>

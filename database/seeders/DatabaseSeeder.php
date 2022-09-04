@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder {
             RestaurantSeeder::class,
             CategorySeeder::class,
             CategoryRestaurantSeeder::class,
+            CompanySeeder::class,
         ]);
     }
 }

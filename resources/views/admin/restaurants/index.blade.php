@@ -4,19 +4,19 @@
     <div class="col container">
         <div class="row justify-content-center">
             <div class="col-xxl-9 col-xl-10 col-lg-11">
-                <h1 class="mt-3 mb-3 text-center fs-4">店舗一覧</h1>
+                <h1 class="mb-3 text-center fs-4">店舗一覧</h1>                
 
+                <div class="d-flex justify-content-between align-items-end mb-3">
+                    <p class="mb-0">計{{$total}}件</p>
+
+                    <a href="{{ route('admin.restaurants.create') }}" class="btn btn-primary text-white shadow-sm">＋ 新規登録</a>
+                </div> 
+                
                 @if (session('flash_message'))
                     <div class="alert alert-info" role="alert">
                         <p class="mb-0">{{ session('flash_message') }}</p>
                     </div>
                 @endif                
-
-                <div class="d-flex justify-content-between align-items-end mb-3">
-                    <p class="mb-0">計{{$total}}件</p>
-
-                    <a href="{{ route('admin.restaurants.create') }}" class="btn btn-primary text-white">＋ 新規登録</a>
-                </div>                      
 
                 <table class="table table-hover">
                     <thead>
