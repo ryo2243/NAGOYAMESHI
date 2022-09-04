@@ -27,6 +27,16 @@
   bottom: 0;  
 }
 
+.users-table {
+  word-break: break-all;
+}
+
+@media screen and (min-width: 1400px) {
+  .nagoyameshi-container {
+    max-width: 1200px;
+  }
+}
+
 @media screen and (max-width: 991px) {
   .admin-sidebar {
     display: none;

@@ -69,7 +69,7 @@
 
     <div class="col container">
         <div class="row justify-content-center">
-            <div class="col-xxl-6 col-xl-7 col-lg-8 col-md-9">        
+            <div class="col-xl-7 col-lg-8 col-md-9">  
                 <h1 class="mt-3 mb-3 text-center fs-4">カテゴリ一覧</h1>
                 
                 @if (session('flash_message'))

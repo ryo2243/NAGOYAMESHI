@@ -142,7 +142,12 @@ class RestaurantController extends Controller {
 
         $categories = Category::all();
 
+        // 設定されたカテゴリのIDを配列化する
+        $category_array = $restaurant->categories()->get()->toArray();
+        $category_ids = array_column($category_array, 'id');
+
         $variables = [
+            'restaurant',
             'lowest_price_min',
             'lowest_price_max',
             'highest_price_min',
@@ -153,7 +158,8 @@ class RestaurantController extends Controller {
             'closing_time_start',
             'closing_time_end',
             'time_unit',
-            'categories'
+            'categories',
+            'category_ids'
         ];
 
         return view('admin.restaurants.edit', compact($variables));
@@ -183,8 +189,6 @@ class RestaurantController extends Controller {
         if ($request->hasFile('image')) {
             $image = $request->file('image')->store('public/restaurants');
             $restaurant->image = basename($image);
-        } else {
-            $restaurant->image = '';
         }
         $restaurant->description = $request->input('description');
         $restaurant->lowest_price = $request->input('lowest_price');
@@ -197,7 +201,7 @@ class RestaurantController extends Controller {
 
         $restaurant->categories()->sync(array_filter($request->input('category_ids')));
 
-        return redirect()->route('admin.restaurants.index')->with('flash_message', '店舗を編集しました。');
+        return redirect()->route('admin.restaurants.show', $restaurant)->with('flash_message', '店舗を編集しました。');
     }
 
     /**

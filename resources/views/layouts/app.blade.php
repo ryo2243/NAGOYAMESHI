@@ -24,7 +24,7 @@
 
         <main class="py-4 content">
             @if (Auth::guard('admin')->check())
-                <div class="container">
+                <div class="container nagoyameshi-container">
                     <div class="row justify-content-center">
                         @include('layouts.sidebar')
                         @yield('content')

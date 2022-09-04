@@ -3,7 +3,7 @@
 @section('content')
     <div class="col container">
         <div class="row justify-content-center">
-            <div class="col-xxl-8 col-xl-9 col-lg-10">
+            <div class="col-xxl-9 col-xl-10 col-lg-11">
                 <h1 class="mt-3 mb-3 text-center fs-4">店舗一覧</h1>
 
                 @if (session('flash_message'))

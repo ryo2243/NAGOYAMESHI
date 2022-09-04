@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-    <div class="container">
+    <div class="container nagoyameshi-container">
         <a class="navbar-brand app-name" href="{{ url('/') }}">
             <div class="d-flex align-items-center">
                 <img class="nagoyameshi-logo me-1" src ="{{ asset('/images/logo.svg') }}" alt="nagoyameshi">
@@ -27,12 +27,12 @@
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('admin.home') }}">ホーム</a>
+                            <a class="dropdown-item" href="#">売上集計</a>
                             <a class="dropdown-item" href="{{ route('admin.users.index') }}">会員一覧</a>
                             <a class="dropdown-item" href="{{ route('admin.restaurants.index') }}">店舗一覧</a>
                             <a class="dropdown-item" href="{{ route('admin.categories.index') }}">カテゴリ一覧</a>
-                            <a class="dropdown-item" href="#">会社情報</a>
-                            <a class="dropdown-item" href="#">会員規約</a>
-                            <a class="dropdown-item" href="#">売上集計</a>
+                            <a class="dropdown-item" href="#">会社概要</a>
+                            <a class="dropdown-item" href="#">利用規約</a>                            
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();

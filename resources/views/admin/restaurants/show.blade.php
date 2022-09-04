@@ -22,18 +22,28 @@
 
     <div class="col container">
         <div class="row justify-content-center">
-            <div class="col-xxl-6 col-xl-7 col-lg-8 col-md-9">
-                <h1 class="mt-3 mb-3 text-center fs-4">{{ $restaurant->name }}</h1>
+            <div class="col-xl-7 col-lg-8 col-md-9">
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">                        
+                        <li class="breadcrumb-item"><a href="{{ route('admin.restaurants.index') }}">店舗一覧</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">店舗詳細</li>
+                    </ol>
+                </nav> 
 
+                <h1 class="mt-3 mb-3 text-center fs-4">{{ $restaurant->name }}</h1>               
 
-                <div class="d-flex justify-content-between align-items-end mb-3">
-                    <a href="{{ route('admin.restaurants.index') }}">&lt; 戻る</a>
-
+                <div class="d-flex justify-content-end align-items-end mb-3">                    
                     <div>
                         <a href="{{ route('admin.restaurants.edit', $restaurant) }}" class="me-2">編集</a>
                         <a href="#" class="link-secondary" data-bs-toggle="modal" data-bs-target="#deleteRestaurantModal">削除</a>
                     </div>
                 </div> 
+
+                @if (session('flash_message'))
+                    <div class="alert alert-info" role="alert">
+                        <p class="mb-0">{{ session('flash_message') }}</p>
+                    </div>
+                @endif                 
 
                 @if ($restaurant->image !== '')
                     <div class="mb-2">
@@ -41,7 +51,7 @@
                     </div>
                 @endif
 
-                <div class="container">
+                <div class="container mb-4">
                     <div class="row pb-2 mb-2 border-bottom">
                         <div class="col-2">
                             <span class="fw-bold">ID</span>          

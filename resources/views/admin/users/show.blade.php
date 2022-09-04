@@ -3,15 +3,17 @@
 @section('content')
     <div class="col container">
         <div class="row justify-content-center">
-            <div class="col-xxl-6 col-xl-7 col-lg-8 col-md-9">
+            <div class="col-xl-7 col-lg-8 col-md-9">
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">                        
+                        <li class="breadcrumb-item"><a href="{{ route('admin.users.index') }}">会員一覧</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">会員詳細</li>
+                    </ol>
+                </nav> 
+
                 <h1 class="mt-3 mb-3 text-center fs-4">{{ $user->name }}</h1>            
 
-
-                <div class="d-flex justify-content-between align-items-end mb-3">
-                    <a href="{{ route('admin.users.index') }}">&lt; 戻る</a>
-                </div> 
-
-                <div class="container">
+                <div class="container mb-4">
                     <div class="row pb-2 mb-2 border-bottom">
                         <div class="col-3">
                             <span class="fw-bold">ID</span>          
