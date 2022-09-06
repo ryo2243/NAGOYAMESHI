@@ -4,11 +4,21 @@
     <div class="col container">
         <div class="row justify-content-center">
             <div class="col-xxl-9 col-xl-10 col-lg-11">
-                <h1 class="mb-3 text-center fs-4">会員一覧</h1>     
+                <h1 class="mb-3 text-center">会員一覧</h1>     
                 
-                <div class="d-flex justify-content-between align-items-end mb-3">
+                <div class="d-flex justify-content-between align-items-end">
+                    <form method="GET" action="{{ route('admin.users.index') }}" class="admin-search-box mb-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="氏名・フリガナで検索" name="keyword" value="{{ $keyword }}">
+                            <button type="submit" class="btn btn-primary text-white shadow-sm">検索</button> 
+                        </div>               
+                    </form>                     
+                </div>
+
+                <div>
                     <p class="mb-0">計{{$total}}件</p>
                 </div>
+                
 
                 <table class="table table-hover users-table">
                     <thead>
@@ -34,7 +44,7 @@
                 </table> 
 
                 <div class="d-flex justify-content-center">
-                    {{ $users->links() }}
+                    {{ $users->appends(request()->query())->links() }}
                 </div>                
             </div>                
         </div>

@@ -15,7 +15,7 @@
                     </ol>
                 </nav> 
                                 
-                <h1 class="mb-3 text-center fs-4">利用規約編集</h1>
+                <h1 class="mb-3 text-center">利用規約編集</h1>
                 
                 <hr class="mb-4">                
 

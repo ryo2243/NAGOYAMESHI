@@ -30,7 +30,7 @@
                     </ol>
                 </nav> 
 
-                <h1 class="mb-3 text-center fs-4">{{ $restaurant->name }}</h1>               
+                <h1 class="mb-3 text-center">{{ $restaurant->name }}</h1>               
 
                 <div class="d-flex justify-content-end align-items-end mb-3">                    
                     <div>

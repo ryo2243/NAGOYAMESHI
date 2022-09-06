@@ -35,6 +35,14 @@
   font-size: 1.125rem;
 }
 
+h1 {
+  font-size: 1.5rem;
+}
+
+.admin-search-box {
+  width: 240px;
+}
+
 @media screen and (min-width: 1400px) {
   .nagoyameshi-container {
     max-width: 1200px;

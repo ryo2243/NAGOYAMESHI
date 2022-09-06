@@ -4,13 +4,22 @@
     <div class="col container">
         <div class="row justify-content-center">
             <div class="col-xxl-9 col-xl-10 col-lg-11">
-                <h1 class="mb-3 text-center fs-4">店舗一覧</h1>                
+                <h1 class="mb-3 text-center">店舗一覧</h1>                
 
-                <div class="d-flex justify-content-between align-items-end mb-3">
+                <div class="d-flex justify-content-between align-items-end flex-wrap">                    
+                    <form method="GET" action="{{ route('admin.restaurants.index') }}" class="admin-search-box mb-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="店舗名で検索" name="keyword" value="{{ $keyword }}">
+                            <button type="submit" class="btn btn-primary text-white shadow-sm">検索</button> 
+                        </div>               
+                    </form>                    
+
+                    <a href="{{ route('admin.restaurants.create') }}" class="btn btn-primary text-white shadow-sm mb-3">＋ 新規登録</a>
+                </div>
+
+                <div>
                     <p class="mb-0">計{{$total}}件</p>
-
-                    <a href="{{ route('admin.restaurants.create') }}" class="btn btn-primary text-white shadow-sm">＋ 新規登録</a>
-                </div> 
+                </div>
                 
                 @if (session('flash_message'))
                     <div class="alert alert-info" role="alert">
@@ -42,7 +51,7 @@
                 </table>                        
 
                 <div class="d-flex justify-content-center">
-                    {{ $restaurants->links() }}
+                    {{ $restaurants->appends(request()->query())->links() }}
                 </div>
             </div>
         </div>

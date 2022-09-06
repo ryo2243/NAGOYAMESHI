@@ -12,11 +12,20 @@ class CategoryController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        $categories = Category::paginate(15);
-        $total = Category::count();
+    public function index(Request $request) {
+        // 検索ボックスに入力されたキーワードを取得する
+        $keyword = $request->input('keyword');
 
-        return view('admin.categories.index', compact('categories', 'total'));
+        // キーワードが存在すれば検索を行い、そうでなければ全件取得する
+        if ($keyword) {
+            $categories = Category::where('name', 'like', "%{$keyword}%")->paginate(15);
+        } else {
+            $categories = Category::paginate(15);
+        }
+
+        $total = $categories->total();
+
+        return view('admin.categories.index', compact('categories', 'keyword', 'total'));
     }
 
     /**

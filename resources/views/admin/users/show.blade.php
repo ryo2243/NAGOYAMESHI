@@ -11,7 +11,7 @@
                     </ol>
                 </nav> 
 
-                <h1 class="mb-3 text-center fs-4">{{ $user->name }}</h1>            
+                <h1 class="mb-3 text-center">{{ $user->name }}</h1>            
 
                 <div class="container mb-4">
                     <div class="row pb-2 mb-2 border-bottom">

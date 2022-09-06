@@ -15,7 +15,7 @@
                     </ol>
                 </nav> 
 
-                <h1 class="mb-3 text-center fs-4">店舗登録</h1>
+                <h1 class="mb-3 text-center">店舗登録</h1>
                 
                 <hr class="mb-4">                
 

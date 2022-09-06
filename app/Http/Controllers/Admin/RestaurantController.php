@@ -13,11 +13,20 @@ class RestaurantController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        $restaurants = Restaurant::paginate(15);
-        $total = Restaurant::count();
+    public function index(Request $request) {
+        // 検索ボックスに入力されたキーワードを取得する
+        $keyword = $request->input('keyword');
 
-        return view('admin.restaurants.index', compact('restaurants', 'total'));
+        // キーワードが存在すれば検索を行い、そうでなければ全件取得する
+        if ($keyword) {
+            $restaurants = Restaurant::where('name', 'like', "%{$keyword}%")->paginate(15);
+        } else {
+            $restaurants = Restaurant::paginate(15);
+        }
+
+        $total = $restaurants->total();
+
+        return view('admin.restaurants.index', compact('restaurants', 'keyword', 'total'));
     }
 
     /**

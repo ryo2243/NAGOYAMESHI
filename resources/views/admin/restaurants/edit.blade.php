@@ -16,7 +16,7 @@
                     </ol>
                 </nav> 
                                 
-                <h1 class="mb-3 text-center fs-4">店舗編集</h1>
+                <h1 class="mb-3 text-center">店舗編集</h1>
                 
                 <hr class="mb-4">                
 

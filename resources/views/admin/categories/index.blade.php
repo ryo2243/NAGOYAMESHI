@@ -70,13 +70,22 @@
     <div class="col container">
         <div class="row justify-content-center">
             <div class="col-xl-7 col-lg-8 col-md-9">  
-                <h1 class="mb-3 text-center fs-4">カテゴリ一覧</h1>                           
+                <h1 class="mb-3 text-center">カテゴリ一覧</h1>                           
 
-                <div class="d-flex justify-content-between align-items-end mb-3">
-                    <p class="mb-0">計{{$total}}件</p>
+                <div class="d-flex justify-content-between align-items-end flex-wrap">
+                    <form method="GET" action="{{ route('admin.categories.index') }}" class="admin-search-box mb-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="カテゴリ名で検索" name="keyword" value="{{ $keyword }}">
+                            <button type="submit" class="btn btn-primary text-white shadow-sm">検索</button> 
+                        </div>               
+                    </form>                      
 
-                    <a href="#" class="btn btn-primary text-white shadow-sm" data-bs-toggle="modal" data-bs-target="#createCategoryModal">＋ 新規登録</a>
+                    <a href="#" class="btn btn-primary text-white shadow-sm mb-3" data-bs-toggle="modal" data-bs-target="#createCategoryModal">＋ 新規登録</a>
                 </div>  
+
+                <div>
+                    <p class="mb-0">計{{$total}}件</p>
+                </div>
                 
                 @if (session('flash_message'))
                     <div class="alert alert-info" role="alert">
@@ -120,7 +129,7 @@
                 </table>                           
 
                 <div class="d-flex justify-content-center">
-                    {{ $categories->links() }}
+                    {{ $categories->appends(request()->query())->links() }}
                 </div>
             </div>
         </div>        
