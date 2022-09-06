@@ -40,4 +40,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin.auth
     Route::resource('categories', Admin\CategoryController::class)->only(['index', 'store', 'update', 'destroy']);
 
     Route::resource('company', Admin\CompanyController::class)->only(['index', 'edit', 'update']);
+
+    Route::resource('terms', Admin\TermController::class)->only(['index', 'edit', 'update']);
 });

@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder {
             CategorySeeder::class,
             CategoryRestaurantSeeder::class,
             CompanySeeder::class,
+            TermSeeder::class,
         ]);
     }
 }
