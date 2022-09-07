@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder {
             CategoryRestaurantSeeder::class,
             CompanySeeder::class,
             TermSeeder::class,
+            RegularHolidaySeeder::class,
+            RegularHolidayRestaurantSeeder::class,
         ]);
     }
 }

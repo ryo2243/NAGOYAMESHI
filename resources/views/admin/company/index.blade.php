@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-xl-7 col-lg-8 col-md-9">
 
-                <h1 class="mb-3 text-center">会社概要</h1>    
+                <h1 class="mb-4 text-center">会社概要</h1>    
                 
                 <div class="d-flex justify-content-end align-items-end mb-3">                    
                     <div>

@@ -4,14 +4,14 @@
     <div class="col container">
         <div class="row justify-content-center">
             <div class="col-xl-7 col-lg-8 col-md-9">
-                <nav class="mb-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <nav class="mb-4" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">                        
                         <li class="breadcrumb-item"><a href="{{ route('admin.users.index') }}">会員一覧</a></li>
                         <li class="breadcrumb-item active" aria-current="page">会員詳細</li>
                     </ol>
                 </nav> 
 
-                <h1 class="mb-3 text-center">{{ $user->name }}</h1>            
+                <h1 class="mb-4 text-center">{{ $user->name }}</h1>            
 
                 <div class="container mb-4">
                     <div class="row pb-2 mb-2 border-bottom">

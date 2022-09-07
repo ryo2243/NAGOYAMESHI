@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\RegularHoliday;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 
@@ -53,6 +54,8 @@ class RestaurantController extends Controller {
         // 何分刻みにするか（単位：分）
         $time_unit = 15;
 
+        $regular_holidays = RegularHoliday::all();
+
         $categories = Category::all();
 
         $variables = [
@@ -66,6 +69,7 @@ class RestaurantController extends Controller {
             'closing_time_start',
             'closing_time_end',
             'time_unit',
+            'regular_holidays',
             'categories'
         ];
 
@@ -109,6 +113,8 @@ class RestaurantController extends Controller {
         $restaurant->seating_capacity = $request->input('seating_capacity');
         $restaurant->save();
 
+        $restaurant->regular_holidays()->sync($request->input('regular_holiday_ids'));
+
         $restaurant->categories()->sync(array_filter($request->input('category_ids')));
 
         return redirect()->route('admin.restaurants.index')->with('flash_message', '店舗を登録しました。');
@@ -149,6 +155,8 @@ class RestaurantController extends Controller {
         // 何分刻みにするか（単位：分）
         $time_unit = 15;
 
+        $regular_holidays = RegularHoliday::all();
+
         $categories = Category::all();
 
         // 設定されたカテゴリのIDを配列化する
@@ -167,6 +175,7 @@ class RestaurantController extends Controller {
             'closing_time_start',
             'closing_time_end',
             'time_unit',
+            'regular_holidays',
             'categories',
             'category_ids'
         ];
@@ -207,6 +216,8 @@ class RestaurantController extends Controller {
         $restaurant->closing_time = $request->input('closing_time');
         $restaurant->seating_capacity = $request->input('seating_capacity');
         $restaurant->save();
+
+        $restaurant->regular_holidays()->sync($request->input('regular_holiday_ids'));
 
         $restaurant->categories()->sync(array_filter($request->input('category_ids')));
 

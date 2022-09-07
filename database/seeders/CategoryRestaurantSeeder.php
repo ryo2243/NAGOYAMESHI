@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Restaurant;
+use App\Models\Category;
 
 
 class CategoryRestaurantSeeder extends Seeder {
@@ -22,12 +22,18 @@ class CategoryRestaurantSeeder extends Seeder {
             // 設定するカテゴリ数を0～3の間でランダムに決める
             $total = mt_rand(0, 3);
 
+            //  設定するカテゴリのidを入れる配列を用意する
+            $category_ids = [];
+
             for ($i = 1; $i <= $total; $i++) {
                 // 設定するカテゴリのidをランダムに決める
                 $category_id = mt_rand(1, $number_of_categories);
 
-                $restaurant->categories()->attach($category_id);
+                // 設定するカテゴリのidを配列の末尾に追加する
+                $category_ids[] = $category_id;
             }
+
+            $restaurant->categories()->sync($category_ids);
         }
     }
 }

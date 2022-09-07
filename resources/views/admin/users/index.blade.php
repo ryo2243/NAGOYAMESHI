@@ -4,7 +4,7 @@
     <div class="col container">
         <div class="row justify-content-center">
             <div class="col-xxl-9 col-xl-10 col-lg-11">
-                <h1 class="mb-3 text-center">会員一覧</h1>     
+                <h1 class="mb-4 text-center">会員一覧</h1>     
                 
                 <div class="d-flex justify-content-between align-items-end">
                     <form method="GET" action="{{ route('admin.users.index') }}" class="admin-search-box mb-3">
@@ -16,7 +16,7 @@
                 </div>
 
                 <div>
-                    <p class="mb-0">計{{$total}}件</p>
+                    <p class="mb-0">計{{ number_format($total) }}件</p>
                 </div>
                 
 

@@ -23,14 +23,14 @@
     <div class="col container">
         <div class="row justify-content-center">
             <div class="col-xl-7 col-lg-8 col-md-9">
-                <nav class="mb-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <nav class="mb-4" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">                        
                         <li class="breadcrumb-item"><a href="{{ route('admin.restaurants.index') }}">店舗一覧</a></li>
                         <li class="breadcrumb-item active" aria-current="page">店舗詳細</li>
                     </ol>
                 </nav> 
 
-                <h1 class="mb-3 text-center">{{ $restaurant->name }}</h1>               
+                <h1 class="mb-4 text-center">{{ $restaurant->name }}</h1>               
 
                 <div class="d-flex justify-content-end align-items-end mb-3">                    
                     <div>
@@ -120,7 +120,29 @@
                         <div class="col">
                             <span>{{ date('G:i', strtotime($restaurant->opening_time)) . '～' . date('G:i', strtotime($restaurant->closing_time)) }}</span>
                         </div>
-                    </div> 
+                    </div>
+                    
+                    <div class="row pb-2 mb-2 border-bottom">
+                        <div class="col-2">
+                            <span class="fw-bold">定休日</span>
+                        </div>
+
+                        <div class="col d-flex"> 
+                            @if ($restaurant->regular_holidays()->exists())
+                                @foreach ($restaurant->regular_holidays()->orderBy('regular_holiday_id', 'asc')->get() as $index => $regular_holiday)
+                                    <div>
+                                        @if ($index === 0)
+                                            {{ $regular_holiday->day }}
+                                        @else
+                                            {{ '、' . $regular_holiday->day }}
+                                        @endif
+                                    </div>
+                                @endforeach                                
+                            @else
+                                <span>年中無休</span>
+                            @endif
+                        </div>
+                    </div>                     
 
                     <div class="row pb-2 mb-2 border-bottom">
                         <div class="col-2">

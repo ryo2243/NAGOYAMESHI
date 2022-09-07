@@ -70,7 +70,7 @@
     <div class="col container">
         <div class="row justify-content-center">
             <div class="col-xl-7 col-lg-8 col-md-9">  
-                <h1 class="mb-3 text-center">カテゴリ一覧</h1>                           
+                <h1 class="mb-4 text-center">カテゴリ一覧</h1>                           
 
                 <div class="d-flex justify-content-between align-items-end flex-wrap">
                     <form method="GET" action="{{ route('admin.categories.index') }}" class="admin-search-box mb-3">
@@ -83,15 +83,15 @@
                     <a href="#" class="btn btn-primary text-white shadow-sm mb-3" data-bs-toggle="modal" data-bs-target="#createCategoryModal">＋ 新規登録</a>
                 </div>  
 
-                <div>
-                    <p class="mb-0">計{{$total}}件</p>
-                </div>
-                
                 @if (session('flash_message'))
                     <div class="alert alert-info" role="alert">
                         <p class="mb-0">{{ session('flash_message') }}</p>
                     </div>
-                @endif   
+                @endif  
+
+                <div>
+                    <p class="mb-0">計{{ number_format($total) }}件</p>
+                </div>                 
                 
                 @if ($errors->any())
                     <div class="alert alert-danger">
