@@ -43,6 +43,10 @@ h1 {
   width: 240px;
 }
 
+a {
+  text-decoration: none !important;
+}
+
 @media screen and (min-width: 1400px) {
   .nagoyameshi-container {
     max-width: 1200px;

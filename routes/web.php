@@ -18,16 +18,20 @@ Route::get('/', function () {
     return view('welcome');
 })->middleware(['guest', 'guest:admin']);
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::middleware('verified')->group(function () {
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+});
 
 // 管理者用のルーティング（ミドルウェアによる認証がコントローラ内で行われているものをグループ化）
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('login', [Admin\Auth\LoginController::class, 'showLoginForm'])->name('login');
     Route::post('login', [Admin\Auth\LoginController::class, 'login'])->name('login');
 
-    Route::get('home', [Admin\HomeController::class, 'index'])->name('home');
+    Route::get('/', [Admin\HomeController::class, 'index'])->name('home');
 });
 
 // 管理者用のルーティング（ミドルウェアによる認証がコントローラ内で行われていないものをグループ化）
