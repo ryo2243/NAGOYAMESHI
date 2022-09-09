@@ -21,7 +21,7 @@
                 
                 
 
-                <div class="container mb-4 admin-terms">
+                <div class="container mb-4 terms">
                     {!! $term->content !!}     
                 </div>                                               
             </div>                          
