@@ -13,18 +13,22 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">    
     <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
 
+    @stack('fonts')
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
     <link href="{{ asset('/css/nagoyameshi.css') }}" rel="stylesheet">
+
+    @stack('styles')
 </head>
 <body>
     <div id="app" class="wrapper">
         @include('layouts.header')
 
-        <main class="py-4 content">
+        <main>
             @if (Auth::guard('admin')->check())
-                <div class="container nagoyameshi-container">
+                <div class="container py-4 nagoyameshi-container">
                     <div class="row justify-content-center">
                         @include('layouts.sidebar')
                         @yield('content')

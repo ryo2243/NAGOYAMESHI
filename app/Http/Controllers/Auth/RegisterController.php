@@ -55,8 +55,8 @@ class RegisterController extends Controller {
             'postal_code' => ['required', 'digits:7'],
             'address' => ['required', 'string', 'max:255'],
             'phone_number' => ['required', 'digits_between:10, 11'],
-            'birthday' => ['digits:8'],
-            'occupation' => ['string', 'max:255'],
+            'birthday' => ['nullable', 'digits:8'],
+            'occupation' => ['nullable', 'string', 'max:255'],
         ]);
     }
 

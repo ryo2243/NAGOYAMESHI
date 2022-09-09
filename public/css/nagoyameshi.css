@@ -1,7 +1,7 @@
 .wrapper {
   min-height: 100vh;
   position: relative;
-  padding-bottom: 60px;
+  padding-bottom: 240px;
   box-sizing: border-box;
 }
 
@@ -12,19 +12,23 @@
 .app-name {
   font-family: 'Carter One', cursive;
   font-size: 24px;
-  color: #191919;
+  color: #191919;  
 }
 
-.app-name:hover {
-  color: #191919;
-  opacity: 0.9;
-}
-
-.nagoyameshi-footer {
+footer {
   width: 100%;
-  height: 60px;
+  height: 240px;
   position: absolute;
   bottom: 0;  
+  padding: 50px 15px;
+}
+
+.footer-logo {
+  margin-bottom: 20px;
+}
+
+.footer-link {
+  margin-bottom: 30px;
 }
 
 .users-table {
@@ -39,12 +43,81 @@ h1 {
   font-size: 1.5rem;
 }
 
+h2 {
+  font-size: 1.375rem;
+}
+
+h3 {
+  font-size: 1.125rem;
+}
+
 .admin-search-box {
-  width: 240px;
+  max-width: 240px;
+}
+
+.user-search-box {
+  max-width: 300px;
 }
 
 a {
   text-decoration: none !important;
+}
+
+.vertical-card-image {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.swiper {
+  width: 100%;
+  height: 480px;
+}
+
+.swiper img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+}
+
+.overlay-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;  
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.overlay-text {      
+  padding: 0 70px;    
+}
+
+.catchphrase-heading {
+  font-size: 36px;
+  line-height: 1.5;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 600;
+  text-shadow: 0.25rem 0.25rem 1rem rgb(0 0 0 / 60%);
+}
+
+.catchphrase-paragraph {
+  font-size: 16px;
+  line-height: 2;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 400;
+  text-shadow: 0.25rem 0.25rem 1rem rgb(0 0 0 / 60%);
+}
+
+.card-link {
+  transition: 0.3s;
+}
+
+.card-link:hover {
+  opacity: 0.7;
+}
+
+.category-name {
+  text-shadow: 0.25rem 0.25rem 1rem rgb(0 0 0 / 60%);
 }
 
 @media screen and (min-width: 1400px) {

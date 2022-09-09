@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container py-4 nagoyameshi-container">
     <div class="row justify-content-center">
-        <div class="col-xl-5 col-lg-6 col-md-7">
+        <div class="col-xl-5 col-lg-6 col-md-8">
             <h1 class="mb-4 text-center">会員登録を完了してください</h1>
 
             @if (session('resent'))

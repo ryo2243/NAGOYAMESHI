@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container py-4 nagoyameshi-container">
     <div class="row justify-content-center">
-        <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6">
+        <div class="col-xl-3 col-lg-4 col-md-5 col-sm-7">
             <h1 class="mb-4 text-center">パスワード再設定</h1>
 
             <p>ご登録中のメールアドレスを入力してください。パスワード再設定用のURLをお送りします。</p>
