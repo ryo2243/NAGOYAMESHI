@@ -35,7 +35,7 @@
             <h2 class="mb-3">キーワードから探す</h2>
             <form method="GET" action="{{ route('restaurants.index') }}" class="user-search-box">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="店舗名・エリア・カテゴリで検索" name="keyword">
+                    <input type="text" class="form-control" placeholder="店舗名・エリア・カテゴリ" name="keyword">
                     <button type="submit" class="btn btn-primary text-white shadow-sm">検索</button> 
                 </div>               
             </form>

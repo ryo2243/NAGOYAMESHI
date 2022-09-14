@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\TermController;
 use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,8 @@ Route::middleware('verified')->group(function () {
 Route::get('company', [CompanyController::class, 'index'])->name('company.index');
 Route::get('terms', [TermController::class, 'index'])->name('terms.index');
 Route::resource('restaurants', RestaurantController::class)->only(['index', 'show']);
+
+Route::resource('restaurants.reviews', ReviewController::class)->except('show');
 
 // 管理者用のルーティング（ミドルウェアによる認証がコントローラ内で行われているものをグループ化）
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {

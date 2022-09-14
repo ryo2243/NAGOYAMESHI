@@ -11,5 +11,5 @@
         <a href="{{ route('company.index') }}" class="link-secondary me-3">会社概要</a>
         <a href="{{ route('terms.index') }}" class="link-secondary">利用規約</a>
     </div>
-    <p class="text-center text-muted small mb-0">&copy; {{ config('app.name', 'Laravel') }} All rights reserved.</span>    
+    <p class="text-center text-muted small mb-0">&copy; {{ config('app.name', 'Laravel') }} All rights reserved.</p>    
 </footer>
