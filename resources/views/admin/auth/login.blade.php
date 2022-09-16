@@ -36,9 +36,7 @@
                                     次回から自動的にログインする
                                 </label>
                             </div>                    
-                    </div>
-
-                    <hr class="my-4">
+                    </div>                    
                     
                     <div class="form-group d-flex justify-content-center mb-4">
                         <button type="submit" class="btn btn-primary text-white shadow-sm w-100">ログイン</button>

@@ -12,7 +12,12 @@
                     </ol>
                 </nav> 
 
-                <h1 class="mb-3 text-center">{{ $restaurant->name }}</h1>               
+                <h1 class="mb-2 text-center">{{ $restaurant->name }}</h1>     
+                <!-- 星評価のアイコンは0.5刻みにし、数値は小数点第3位以下を四捨五入する（小数点第2位まで表示する） -->
+                <p class="text-center">
+                    <span class="star-rating me-1" data-rate="{{ round($restaurant->reviews->avg('score') * 2) / 2 }}"></span>
+                    {{ round($restaurant->reviews->avg('score'), 2) }}（{{ $restaurant->reviews->count() }}件）
+                </p>                          
 
                 @if (session('flash_message'))
                     <div class="alert alert-info" role="alert">
@@ -22,13 +27,13 @@
                 
                 <ul class="nav nav-tabs mb-2">
                     <li class="nav-item">
-                        <a class="nav-link active bg-primary text-white" aria-current="page" href="#">トップ</a>
+                        <a class="nav-link active bg-primary text-white" aria-current="page" href="{{ route('restaurants.show', $restaurant) }}">トップ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link link-dark" href="#">予約</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link link-dark" href="#">レビュー</a>
+                        <a class="nav-link link-dark" href="{{ route('restaurants.reviews.index', $restaurant) }}">レビュー</a>
                     </li>
                 </ul>                
 
@@ -65,7 +70,7 @@
                         </div>
 
                         <div class="col">
-                            <span>{{ number_format($restaurant->lowest_price) . '～' . number_format($restaurant->highest_price) }}円</span>
+                            <span>{{ number_format($restaurant->lowest_price) }}円～{{ number_format($restaurant->highest_price) }}円</span>
                         </div>
                     </div> 
                     

@@ -36,14 +36,14 @@
                                     次回から自動的にログインする
                                 </label>
                             </div>                    
-                    </div>
-
-                    <hr class="my-4">
+                    </div>                    
                     
                     <div class="form-group d-flex justify-content-center mb-4">
                         <button type="submit" class="btn btn-primary text-white shadow-sm w-100">ログイン</button>
                     </div>                                              
                 </form>       
+
+                <hr class="my-4">                
                             
                 <div class="text-center mb-3">
                     <a href="{{ route('password.request') }}">

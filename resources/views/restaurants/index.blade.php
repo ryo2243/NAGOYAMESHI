@@ -10,7 +10,7 @@
                 </ol>
             </nav>         
 
-            <div class="col-lg-3 col-md-12">               
+            <div class="col-xl-3 col-lg-4 col-md-12">               
                 <form method="GET" action="{{ route('restaurants.index') }}" class="w-100 mb-3">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="店舗名・エリア・カテゴリ" name="keyword" value="{{ $keyword }}">
@@ -71,46 +71,67 @@
                 </div>                
             </div>
 
-            <div class="col container">
-                <div class="row justify-content-center">
-                    <div class="col-xxl-10 col-xl-11 col-lg-12">                                       
-                        <div class="d-flex justify-content-between flex-wrap">
-                            <p class="mb-0">{{ number_format($total) }}件の店舗が見つかりました</p>                            
-                            <select class="form-select form-select-sm sort-box" aria-label=".form-select-sm example">
-                                <option selected>掲載日が新しい順</option>
-                                <option value="1">価格が安い順</option>
-                                <option value="2">評価が高い順</option>
-                                <option value="3">予約数が多い順</option>
-                            </select>                                                           
-                        </div>                                
+            <div class="col">                                                                          
+                <div class="d-flex justify-content-between flex-wrap">
+                    <p class="fs-5 mb-3">{{ number_format($total) }}件の店舗が見つかりました<span class="fs-6">（{{ 15 * $page - 14 }}～{{ 15 * $page }}件）</span></p>                            
+                    <select class="form-select form-select-sm mb-3 sort-box" aria-label=".form-select-sm example">
+                        <option selected>掲載日が新しい順</option>
+                        <option value="1">価格が安い順</option>
+                        <option value="2">評価が高い順</option>
+                        <option value="3">予約数が多い順</option>
+                    </select>                                                           
+                </div>   
+                
+                @foreach ($restaurants as $restaurant)                        
+                    <div class="mb-3">
+                        <a href="{{ route('restaurants.show', $restaurant) }}" class="link-dark card-link">
+                            <div class="card h-100">   
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        @if ($restaurant->image !== '')                                    
+                                            <img src="{{ asset('storage/restaurants/' . $restaurant->image) }}" class="card-img-top horizontal-card-image"> 
+                                        @else
+                                            <img src="{{ asset('/images/no_image.jpg') }}" class="card-img-top horizontal-card-image" alt="画像なし">
+                                        @endif  
+                                    </div> 
+                                    <div class="col-md-8">                                                                                                                        
+                                        <div class="card-body">                                    
+                                            <h3 class="card-title">{{ $restaurant->name }}</h3>                                            
+                                            <div class="col d-flex text-secondary"> 
+                                                @if ($restaurant->categories()->exists())
+                                                    @foreach ($restaurant->categories as $index => $category)
+                                                        <div>
+                                                            @if ($index === 0)
+                                                                {{ $category->name }}
+                                                            @else
+                                                                {{ '、' . $category->name }}
+                                                            @endif
+                                                        </div>
+                                                    @endforeach                                
+                                                @else
+                                                    <span>カテゴリ未設定</span>
+                                                @endif
+                                            </div> 
+                                            <hr class="my-2">
+                                            <!-- 星評価のアイコンは0.5刻みにし、数値は小数点第3位以下を四捨五入する（小数点第2位まで表示する） -->
+                                            <p class="mb-1">
+                                                <span class="star-rating me-1" data-rate="{{ round($restaurant->reviews->avg('score') * 2) / 2 }}"></span>
+                                                {{ round($restaurant->reviews->avg('score'), 2) }}（{{ $restaurant->reviews->count() }}件）
+                                            </p>   
+                                            <div class="mb-1">
+                                                <span>{{ number_format($restaurant->lowest_price) }}円～{{ number_format($restaurant->highest_price) }}円</span>
+                                            </div>                                                                                                                                                                               
+                                            <p class="card-text">{{ mb_substr($restaurant->description, 0, 75) }}@if (mb_strlen($restaurant->description) > 75)...@endif</p>                                    
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>    
+                        </a>            
+                    </div>                       
+                @endforeach                                             
 
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">店舗名</th>
-                                    <th scope="col">郵便番号</th>
-                                    <th scope="col">住所</th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>   
-                            <tbody>                 
-                                @foreach($restaurants as $restaurant)  
-                                    <tr>
-                                        <td>{{ $restaurant->id }}</td>
-                                        <td>{{ $restaurant->name }}</td>
-                                        <td>{{ substr($restaurant->postal_code, 0, 3) . '-' . substr($restaurant->postal_code, 3) }}</td>
-                                        <td>{{ $restaurant->address }}</td>
-                                        <td><a href="{{ route('restaurants.show', $restaurant) }}">詳細</a></td>
-                                    </tr>  
-                                @endforeach
-                            </tbody>
-                        </table>                        
-
-                        <div class="d-flex justify-content-center">
-                            {{ $restaurants->appends(request()->query())->links() }}
-                        </div>
-                    </div>
+                <div class="d-flex justify-content-center">
+                    {{ $restaurants->appends(request()->query())->links() }}
                 </div>
             </div>
         </div>

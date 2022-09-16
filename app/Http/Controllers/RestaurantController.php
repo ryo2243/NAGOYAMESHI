@@ -25,6 +25,13 @@ class RestaurantController extends Controller {
         // 選択された予算を取得する
         $price = $request->input('price');
 
+        // ページ数を取得する
+        if ($request->has('page')) {
+            $page = $request->input('page');
+        } else {
+            $page = 1;
+        }
+
         // キーワードが存在すれば検索を行い、そうでなければ全件取得する
         if ($keyword) {
             $restaurants = Restaurant::where('name', 'like', "%{$keyword}%")->orderBy('created_at', 'asc')->paginate(15);
@@ -43,6 +50,7 @@ class RestaurantController extends Controller {
             'restaurants',
             'keyword',
             'price',
+            'page',
             'total',
         ];
 

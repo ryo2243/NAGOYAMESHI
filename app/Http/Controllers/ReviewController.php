@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Review;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller {
     /**
@@ -13,9 +14,9 @@ class ReviewController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index(Restaurant $restaurant) {
-        $reviews = $restaurant->reviews;
+        $reviews = Review::where('restaurant_id', $restaurant->id)->paginate(5);
 
-        return view('reviews.index', compact('reviews'));
+        return view('reviews.index', compact('restaurant', 'reviews'));
     }
 
     /**
@@ -23,8 +24,8 @@ class ReviewController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
-        //
+    public function create(Restaurant $restaurant) {
+        return view('reviews.create', compact('restaurant'));
     }
 
     /**
@@ -33,8 +34,20 @@ class ReviewController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-        //
+    public function store(Request $request, Restaurant $restaurant) {
+        $request->validate([
+            'score' => 'required|numeric|between:1,5',
+            'content' => 'required',
+        ]);
+
+        $review = new Review();
+        $review->score = $request->input('score');
+        $review->content = $request->input('content');
+        $review->restaurant_id = $restaurant->id;
+        $review->user_id = Auth::id();
+        $review->save();
+
+        return redirect()->route('restaurants.reviews.index', $restaurant)->with('flash_message', 'レビューを投稿しました。');
     }
 
     /**
@@ -43,8 +56,8 @@ class ReviewController extends Controller {
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function edit(Review $review) {
-        //
+    public function edit(Restaurant $restaurant, Review $review) {
+        return view('reviews.edit', compact('restaurant', 'review'));
     }
 
     /**
@@ -54,8 +67,19 @@ class ReviewController extends Controller {
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Review $review) {
-        //
+    public function update(Request $request, Restaurant $restaurant, Review $review) {
+        $request->validate([
+            'score' => 'required|numeric|between:1,5',
+            'content' => 'required',
+        ]);
+
+        $review->score = $request->input('score');
+        $review->content = $request->input('content');
+        $review->restaurant_id = $restaurant->id;
+        $review->user_id = Auth::id();
+        $review->save();
+
+        return redirect()->route('restaurants.reviews.index', $restaurant)->with('flash_message', 'レビューを編集しました。');
     }
 
     /**
@@ -64,7 +88,9 @@ class ReviewController extends Controller {
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Review $review) {
-        //
+    public function destroy(Restaurant $restaurant, Review $review) {
+        $review->delete();
+
+        return redirect()->route('restaurants.reviews.index', $restaurant)->with('flash_message', 'レビューを削除しました。');
     }
 }

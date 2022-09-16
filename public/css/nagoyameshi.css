@@ -69,6 +69,12 @@ a {
   object-fit: cover;
 }
 
+.horizontal-card-image {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+}
+
 .swiper {
   width: 100%;
   height: 480px;
@@ -122,6 +128,64 @@ a {
 
 .sort-box {
   width: 150px;
+}
+
+/* 星評価 */
+.star-rating {
+  position: relative;
+  z-index: 0;
+  display: inline-block;
+  white-space: nowrap;
+  color: #CCCCCC;
+}
+
+.star-rating:before,
+.star-rating:after {
+  content: '★★★★★';
+}
+
+.star-rating:after {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  color: #F29F05;  
+}
+
+.star-rating[data-rate="5"]:after {
+  width: 100%;
+}
+.star-rating[data-rate="4.5"]:after {
+  width: 90%;
+}
+.star-rating[data-rate="4"]:after {
+  width: 80%;
+}
+.star-rating[data-rate="3.5"]:after {
+  width: 70%;
+}
+.star-rating[data-rate="3"]:after {
+  width: 60%;
+}
+.star-rating[data-rate="2.5"]:after {
+  width: 50%;
+}
+.star-rating[data-rate="2"]:after {
+  width: 40%;
+}
+.star-rating[data-rate="1.5"]:after {
+  width: 30%;
+}
+.star-rating[data-rate="1"]:after {
+  width: 20%;
+}
+.star-rating[data-rate="0.5"]:after {
+  width: 10%;
+}
+.star-rating[data-rate="0"]:after {
+  width: 0%;
 }
 
 @media screen and (min-width: 1400px) {

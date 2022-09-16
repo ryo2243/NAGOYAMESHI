@@ -30,6 +30,12 @@
         </div>      
     </div>
 
+    @if (session('flash_message'))
+        <div class="alert alert-info" role="alert">
+            <p class="mb-0">{{ session('flash_message') }}</p>
+        </div>
+    @endif     
+
     <div class="bg-light mb-4 py-4">
         <div class="container nagoyameshi-container">
             <h2 class="mb-3">キーワードから探す</h2>
@@ -47,7 +53,7 @@
         <div class="row row-cols-xl-6 row-cols-md-3 row-cols-2 g-3 mb-5">
             @foreach ($new_restaurants as $new_restaurant)                        
                 <div class="col">
-                    <a href="{{ route('admin.restaurants.show', $new_restaurant) }}" class="link-dark card-link">
+                    <a href="{{ route('restaurants.show', $new_restaurant) }}" class="link-dark card-link">
                         <div class="card h-100">                                    
                             @if ($new_restaurant->image !== '')                                    
                                 <img src="{{ asset('storage/restaurants/' . $new_restaurant->image) }}" class="card-img-top vertical-card-image"> 
