@@ -31,9 +31,17 @@
     </div>
 
     @if (session('flash_message'))
-        <div class="alert alert-info" role="alert">
-            <p class="mb-0">{{ session('flash_message') }}</p>
-        </div>
+        <div class="container nagoyameshi-container my-3">
+            <div class="alert alert-info" role="alert">
+                <p class="mb-0">{{ session('flash_message') }}</p>
+            </div>
+        </div>             
+    @elseif (session('login_message'))
+        <div class="container nagoyameshi-container my-3">
+            <div class="alert alert-info" role="alert">
+                <p class="mb-0">{{ session('login_message') }}</p>
+            </div>
+        </div>     
     @endif     
 
     <div class="bg-light mb-4 py-4">
