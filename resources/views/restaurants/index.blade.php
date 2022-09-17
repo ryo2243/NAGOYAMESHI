@@ -20,6 +20,31 @@
 
                 <div class="card mb-3">
                     <div class="card-header">
+                        カテゴリから探す
+                    </div>
+                    <div class="card-body">
+                        <form method="GET" action="{{ route('restaurants.index') }}" class="w-100">
+                            <div class="form-group mb-3">
+                                <select class="form-control form-select" name="category_id">  
+                                    <option hidden>選択してください</option>     
+                                    @foreach ($categories as $category)
+                                        @if ($category->id == $category_id)                                        
+                                            <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                                        @else
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endif                                        
+                                    @endforeach                                                        
+                                </select> 
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary text-white shadow-sm w-100">検索</button>
+                            </div>                                           
+                        </form>
+                    </div>
+                </div>                
+
+                <div class="card mb-3">
+                    <div class="card-header">
                         予算から探す
                     </div>
                     <div class="card-body">
@@ -73,13 +98,34 @@
 
             <div class="col">                                                                          
                 <div class="d-flex justify-content-between flex-wrap">
-                    <p class="fs-5 mb-3">{{ number_format($total) }}件の店舗が見つかりました<span class="fs-6">（{{ 15 * $page - 14 }}～{{ 15 * $page }}件）</span></p>                            
-                    <select class="form-select form-select-sm mb-3 sort-box" aria-label=".form-select-sm example">
-                        <option selected>掲載日が新しい順</option>
-                        <option value="1">価格が安い順</option>
-                        <option value="2">評価が高い順</option>
-                        <option value="3">予約数が多い順</option>
-                    </select>                                                           
+                    <p class="fs-5 mb-3">
+                        {{ number_format($total) }}件の店舗が見つかりました
+                        <span class="fs-6">
+                            @if ($total > 15)
+                                （{{ 15 * $page - 14 }}～{{ 15 * $page }}件）
+                            @endif
+                        </span>
+                    </p>   
+                    <form method="GET" action="{{ route('restaurants.index') }}" class="mb-3 sort-box"> 
+                        @if ($keyword)
+                            <input type="hidden" name="keyword" value="{{ $keyword }}">
+                        @endif
+                        @if ($category_id)
+                            <input type="hidden" name="category_id" value="{{ $category_id }}">
+                        @endif                        
+                        @if ($price)
+                            <input type="hidden" name="price" value="{{ $price }}">  
+                        @endif                                          
+                        <select class="form-select form-select-sm" name="select_sort" aria-label=".form-select-sm example" onChange="this.form.submit();">
+                            @foreach ($sorts as $key => $value)
+                                @if ($sorted === $value)
+                                    <option value="{{ $value }}" selected>{{ $key }}</option>
+                                @else
+                                    <option value="{{ $value }}">{{ $key }}</option>
+                                @endif                            
+                            @endforeach
+                        </select>   
+                    </form>
                 </div>   
                 
                 @foreach ($restaurants as $restaurant)                        

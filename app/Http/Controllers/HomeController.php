@@ -22,12 +22,14 @@ class HomeController extends Controller {
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index() {
-        $new_restaurants = Restaurant::orderBy('created_at', 'desc')->limit(6)->get();
+        $highly_rated_restaurants = Restaurant::sortable(['rating' => 'desc'])->limit(6)->get();
         $categories = Category::all();
+        $new_restaurants = Restaurant::orderBy('created_at', 'desc')->limit(6)->get();
 
         $variables = [
+            'highly_rated_restaurants',
+            'categories',
             'new_restaurants',
-            'categories'
         ];
 
         return view('home', compact($variables));

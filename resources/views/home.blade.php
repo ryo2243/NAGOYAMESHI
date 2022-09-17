@@ -49,20 +49,38 @@
     </div>    
 
     <div class="container nagoyameshi-container">                                  
-        <h2 class="mb-3">新規掲載店</h2>
+        <h2 class="mb-3">評価が高いお店</h2>
         <div class="row row-cols-xl-6 row-cols-md-3 row-cols-2 g-3 mb-5">
-            @foreach ($new_restaurants as $new_restaurant)                        
+            @foreach ($highly_rated_restaurants as $highly_rated_restaurant)                        
                 <div class="col">
-                    <a href="{{ route('restaurants.show', $new_restaurant) }}" class="link-dark card-link">
+                    <a href="{{ route('restaurants.show', $highly_rated_restaurant) }}" class="link-dark card-link">
                         <div class="card h-100">                                    
-                            @if ($new_restaurant->image !== '')                                    
-                                <img src="{{ asset('storage/restaurants/' . $new_restaurant->image) }}" class="card-img-top vertical-card-image"> 
+                            @if ($highly_rated_restaurant->image !== '')                                    
+                                <img src="{{ asset('storage/restaurants/' . $highly_rated_restaurant->image) }}" class="card-img-top vertical-card-image"> 
                             @else
                                 <img src="{{ asset('/images/no_image.jpg') }}" class="card-img-top vertical-card-image" alt="画像なし">
                             @endif                                                                                          
                             <div class="card-body">                                    
-                                <h3 class="card-title">{{ $new_restaurant->name }}</h3>
-                                <p class="card-text">{{ mb_substr($new_restaurant->description, 0, 30) }}@if (mb_strlen($new_restaurant->description) > 30)...@endif</p>                                    
+                                <h3 class="card-title">{{ $highly_rated_restaurant->name }}</h3>
+                                <div class="text-muted small mb-1">
+                                    @if ($highly_rated_restaurant->categories()->exists())
+                                        @foreach ($highly_rated_restaurant->categories as $index => $category)
+                                            <div class="d-inline-block">
+                                                @if ($index === 0)
+                                                    {{ $category->name }}
+                                                @else
+                                                    {{ ' ' . $category->name }}
+                                                @endif
+                                            </div>
+                                        @endforeach                                
+                                    @else
+                                        <span>カテゴリ未設定</span>
+                                    @endif                                    
+                                </div>
+                                <p class="card-text">
+                                    <span class="star-rating me-1" data-rate="{{ round($highly_rated_restaurant->reviews->avg('score') * 2) / 2 }}"></span>
+                                    {{ round($highly_rated_restaurant->reviews->avg('score'), 2) }}
+                                </p>                                    
                             </div>
                         </div>    
                     </a>            
@@ -73,7 +91,7 @@
         <h2 class="mb-3">カテゴリから探す</h2>
         <div class="row row-cols-xl-6 row-cols-md-3 row-cols-2 g-3 mb-3">
             <div class="col">
-                <a href="{{ route('admin.restaurants.index') }}/?category_id={{ $categories->where('name', '和食')->value('id') }}" class="card-link">
+                <a href="{{ route('restaurants.index') }}/?category_id={{ $categories->where('name', '和食')->value('id') }}" class="card-link">
                     <div class="card text-white">
                         <img src="{{ asset('/images/washoku.jpg') }}" class="card-img vertical-card-image" alt="和食">
                         <div class="card-img-overlay d-flex justify-content-center align-items-center overlay-background">
@@ -84,7 +102,7 @@
             </div> 
 
             <div class="col">
-                <a href="{{ route('admin.restaurants.index') }}/?category_id={{ $categories->where('name', '和食')->value('id') }}" class="card-link">
+                <a href="{{ route('restaurants.index') }}/?category_id={{ $categories->where('name', 'うどん')->value('id') }}" class="card-link">
                     <div class="card text-white">
                         <img src="{{ asset('/images/udon.jpg') }}" class="card-img vertical-card-image" alt="うどん">
                         <div class="card-img-overlay d-flex justify-content-center align-items-center overlay-background">
@@ -95,7 +113,7 @@
             </div>    
             
             <div class="col">
-                <a href="{{ route('admin.restaurants.index') }}/?category_id={{ $categories->where('name', '丼物')->value('id') }}" class="card-link">
+                <a href="{{ route('restaurants.index') }}/?category_id={{ $categories->where('name', '丼物')->value('id') }}" class="card-link">
                     <div class="card text-white">
                         <img src="{{ asset('/images/don.jpg') }}" class="card-img vertical-card-image" alt="丼物">
                         <div class="card-img-overlay d-flex justify-content-center align-items-center overlay-background">
@@ -106,7 +124,7 @@
             </div> 
             
             <div class="col">
-                <a href="{{ route('admin.restaurants.index') }}/?category_id={{ $categories->where('name', 'ラーメン')->value('id') }}" class="card-link">
+                <a href="{{ route('restaurants.index') }}/?category_id={{ $categories->where('name', 'ラーメン')->value('id') }}" class="card-link">
                     <div class="card text-white">
                         <img src="{{ asset('/images/ramen.jpg') }}" class="card-img vertical-card-image" alt="ラーメン">
                         <div class="card-img-overlay d-flex justify-content-center align-items-center overlay-background">
@@ -117,7 +135,7 @@
             </div> 
             
             <div class="col">
-                <a href="{{ route('admin.restaurants.index') }}/?category_id={{ $categories->where('name', 'おでん')->value('id') }}" class="card-link">
+                <a href="{{ route('restaurants.index') }}/?category_id={{ $categories->where('name', 'おでん')->value('id') }}" class="card-link">
                     <div class="card text-white">
                         <img src="{{ asset('/images/oden.jpg') }}" class="card-img vertical-card-image" alt="おでん">
                         <div class="card-img-overlay d-flex justify-content-center align-items-center overlay-background">
@@ -128,7 +146,7 @@
             </div>  
             
             <div class="col">
-                <a href="{{ route('admin.restaurants.index') }}/?category_id={{ $categories->where('name', '揚げ物')->value('id') }}" class="card-link">
+                <a href="{{ route('restaurants.index') }}/?category_id={{ $categories->where('name', '揚げ物')->value('id') }}" class="card-link">
                     <div class="card text-white">
                         <img src="{{ asset('/images/fried.jpg') }}" class="card-img vertical-card-image" alt="揚げ物">
                         <div class="card-img-overlay d-flex justify-content-center align-items-center overlay-background">
@@ -143,9 +161,45 @@
                 @if ($category->name === '和食' || $category->name === 'うどん' || $category->name === '丼物' || $category->name === 'ラーメン' || $category->name === 'おでん' || $category->name === '揚げ物')
                     @continue
                 @else
-                    <a href="{{ route('admin.restaurants.index') }}/?category_id={{ $category->id }}" class="btn btn-outline-secondary btn-sm me-1 mb-2">{{ $category->name }}</a>
+                    <a href="{{ route('restaurants.index') }}/?category_id={{ $category->id }}" class="btn btn-outline-secondary btn-sm me-1 mb-2">{{ $category->name }}</a>
                 @endif
             @endforeach
-        </div>                                     
+        </div>   
+        
+        <h2 class="mb-3">新規掲載店</h2>
+        <div class="row row-cols-xl-6 row-cols-md-3 row-cols-2 g-3 mb-5">
+            @foreach ($new_restaurants as $new_restaurant)                        
+                <div class="col">
+                    <a href="{{ route('restaurants.show', $new_restaurant) }}" class="link-dark card-link">
+                        <div class="card h-100">                                    
+                            @if ($new_restaurant->image !== '')                                    
+                                <img src="{{ asset('storage/restaurants/' . $new_restaurant->image) }}" class="card-img-top vertical-card-image"> 
+                            @else
+                                <img src="{{ asset('/images/no_image.jpg') }}" class="card-img-top vertical-card-image" alt="画像なし">
+                            @endif                                                                                          
+                            <div class="card-body">                                    
+                                <h3 class="card-title">{{ $new_restaurant->name }}</h3>
+                                <div class="text-muted small mb-1">
+                                    @if ($highly_rated_restaurant->categories()->exists())
+                                        @foreach ($highly_rated_restaurant->categories as $index => $category)
+                                            <div class="d-inline-block">
+                                                @if ($index === 0)
+                                                    {{ $category->name }}
+                                                @else
+                                                    {{ ' ' . $category->name }}
+                                                @endif
+                                            </div>
+                                        @endforeach                                
+                                    @else
+                                        <span>カテゴリ未設定</span>
+                                    @endif                                    
+                                </div>                                
+                                <p class="card-text">{{ mb_substr($new_restaurant->description, 0, 19) }}@if (mb_strlen($new_restaurant->description) > 19)...@endif</p>                                    
+                            </div>
+                        </div>    
+                    </a>            
+                </div>                       
+            @endforeach
+        </div>        
     </div>
 @endsection
