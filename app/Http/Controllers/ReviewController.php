@@ -14,7 +14,7 @@ class ReviewController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index(Restaurant $restaurant) {
-        $reviews = Review::where('restaurant_id', $restaurant->id)->paginate(5);
+        $reviews = Review::where('restaurant_id', $restaurant->id)->orderBy('created_at', 'desc')->paginate(5);
 
         return view('reviews.index', compact('restaurant', 'reviews'));
     }

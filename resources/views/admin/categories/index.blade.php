@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @push('scripts')
-    <script src="{{ asset('/js/modal.js') }}"></script>    
+    <script src="{{ asset('/js/category-modal.js') }}"></script>    
 @endpush
 
 @section('content')

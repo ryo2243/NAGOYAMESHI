@@ -52,7 +52,7 @@ class RestaurantController extends Controller {
         $closing_time_end = 24;
 
         // 何分刻みにするか（単位：分）
-        $time_unit = 15;
+        $time_unit = 30;
 
         $regular_holidays = RegularHoliday::all();
 
@@ -153,7 +153,7 @@ class RestaurantController extends Controller {
         $closing_time_end = 24;
 
         // 何分刻みにするか（単位：分）
-        $time_unit = 15;
+        $time_unit = 30;
 
         $regular_holidays = RegularHoliday::all();
 

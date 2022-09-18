@@ -22,6 +22,10 @@ class Restaurant extends Model {
         return $this->hasMany(Review::class);
     }
 
+    public function reservations() {
+        return $this->hasMany(Reservation::class);
+    }
+
     public $sortable = ['created_at'];
 
     // Sortableにおける独自のクエリ
@@ -51,5 +55,11 @@ class Restaurant extends Model {
             ->withCount('reviews')
             ->withAvg('reviews', 'score')
             ->orderByRaw("((reviews_avg_score - {$reviews_average_score}) * 10 / {$reviews_score_standard_deviation}) * reviews_count {$direction}");
+    }
+
+    // Sortableにおける独自のクエリ
+    public function popularSortable($query, $direction) {
+        // 予約数を基準に並び替える
+        return $query->withCount('reservations')->orderBy('reservations_count', $direction);
     }
 }

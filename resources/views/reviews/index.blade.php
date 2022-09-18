@@ -1,6 +1,29 @@
 @extends('layouts.app')
 
+@push('scripts')
+    <script src="{{ asset('/js/review-modal.js') }}"></script>    
+@endpush
+
 @section('content')
+<!-- レビューの削除用モーダル -->
+<div class="modal fade" id="deleteReviewModal" tabindex="-1" aria-labelledby="deleteReviewModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteReviewModalLabel">レビューを削除してもよろしいですか？</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
+            </div>
+            <div class="modal-footer">
+                <form action="" method="post" name="deleteReviewForm">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-danger text-white shadow-sm">削除</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
     <div class="container nagoyameshi-container pb-5">
         <div class="row justify-content-center">
             <div class="col-xxl-6 col-xl-7 col-lg-8 col-md-10">
@@ -31,7 +54,7 @@
                         <a class="nav-link link-dark" href="{{ route('restaurants.show', $restaurant) }}">トップ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link link-dark" href="#">予約</a>
+                        <a class="nav-link link-dark" href="{{ route('restaurants.reservations.create', $restaurant) }}">予約</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active bg-primary text-white" aria-current="page" href="{{ route('restaurants.reviews.index', $restaurant) }}">レビュー</a>
@@ -39,45 +62,26 @@
                 </ul>  
                 
                 @foreach ($reviews as $review)
-                    <!-- レビューの削除用モーダル -->
-                    <div class="modal fade" id="deleteReviewModal{{ $review->id }}" tabindex="-1" aria-labelledby="deleteReviewModalLabel{{ $review->id }}">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="deleteReviewModalLabel{{ $review->id }}">レビューを削除してもよろしいですか？</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
-                                </div>
-                                <div class="modal-footer">
-                                    <form action="{{ route('restaurants.reviews.destroy', [$restaurant, $review]) }}" method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn btn-danger text-white shadow-sm">削除</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="card mb-3">
-                    <div class="card-header d-flex justify-content-between">
-                        <div>
-                            @if ($review->user)
-                                {{ $review->user->name }}さん
-                            @else
-                                退会済みの会員
+                        <div class="card-header d-flex justify-content-between">
+                            <div>
+                                @if ($review->user)
+                                    {{ $review->user->name }}さん
+                                @else
+                                    退会済みの会員
+                                @endif
+                            </div>
+                            @if ($review->user_id === Auth::id())
+                                <div>
+                                    <a href="{{ route('restaurants.reviews.edit', [$restaurant, $review]) }}" class="me-2">編集</a>
+                                    <a href="#" class="link-secondary" data-bs-toggle="modal" data-bs-target="#deleteReviewModal" data-review-id="{{ $review->id }}">削除</a>
+                                </div>
                             @endif
                         </div>
-                        @if ($review->user_id === Auth::id())
-                            <div>
-                                <a href="{{ route('restaurants.reviews.edit', [$restaurant, $review]) }}" class="me-2">編集</a>
-                                <a href="#" class="link-secondary" data-bs-toggle="modal" data-bs-target="#deleteReviewModal{{ $review->id }}">削除</a>
-                            </div>
-                        @endif
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><span class="star-rating" data-rate="{{ $review->score }}"></span></li>
-                        <li class="list-group-item">{{ $review->content }}</li>                        
-                    </ul>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><span class="star-rating" data-rate="{{ $review->score }}"></span></li>
+                            <li class="list-group-item">{{ $review->content }}</li>                        
+                        </ul>
                     </div>                    
                 @endforeach
 

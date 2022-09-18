@@ -16,8 +16,8 @@ class RestaurantFactory extends Factory {
     public function definition() {
         // 最低価格は500～10,000円かつ500で割り切れる価格にする
         $dummy_lowest_price = floor(mt_rand(500, 10000) / 500) * 500;
-        // 開店時間は00:00～15:45かつ15分刻みにする（日本時間1970/01/02 00:00:00～1970/01/02 15:45:00のUNIXタイムスタンプを使用）
-        $dummy_opening_time = date('H:i:s', floor(mt_rand(54000, 110700) / 900) * 900);
+        // 開店時間は00:00～15:30かつ30分刻みにする（日本時間1970/01/02 00:00:00～1970/01/02 15:30:00のUNIXタイムスタンプを使用）
+        $dummy_opening_time = date('H:i:s', floor(mt_rand(54000, 109800) / 1800) * 1800);
 
         return [
             'name' => $this->faker->name,

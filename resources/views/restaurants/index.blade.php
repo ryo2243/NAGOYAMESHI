@@ -25,8 +25,8 @@
                     <div class="card-body">
                         <form method="GET" action="{{ route('restaurants.index') }}" class="w-100">
                             <div class="form-group mb-3">
-                                <select class="form-control form-select" name="category_id">  
-                                    <option hidden>選択してください</option>     
+                                <select class="form-control form-select" name="category_id" required>  
+                                    <option value="" hidden>選択してください</option>     
                                     @foreach ($categories as $category)
                                         @if ($category->id == $category_id)                                        
                                             <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
@@ -50,8 +50,8 @@
                     <div class="card-body">
                         <form method="GET" action="{{ route('restaurants.index') }}" class="w-100">
                             <div class="form-group mb-3">
-                                <select class="form-control form-select" name="price">  
-                                    <option hidden>選択してください</option>                              
+                                <select class="form-control form-select" name="price" required>  
+                                    <option value="" hidden>選択してください</option>                              
                                     @for ($i = 0; $i <= ($price_max - $price_min) / $price_unit; $i++)
                                         {{ $each_price = $price_min + ($price_unit * $i) }}
                                         @if ($each_price == $price)                                        
@@ -67,33 +67,7 @@
                             </div>                                           
                         </form>
                     </div>
-                </div>     
-                
-                <div class="card mb-3">
-                    <div class="card-header">
-                        予約可能なお店を探す
-                    </div>
-                    <div class="card-body">
-                        <form method="GET" action="{{ route('restaurants.index') }}" class="w-100">
-                            <div class="form-group mb-3">
-                                <select class="form-control form-select" name="price">  
-                                    <option hidden>選択してください</option>                              
-                                    @for ($i = 0; $i <= ($price_max - $price_min) / $price_unit; $i++)
-                                        {{ $each_price = $price_min + ($price_unit * $i) }}
-                                        @if ($each_price == $price)                                        
-                                            <option value="{{ $each_price }}" selected>{{ number_format($each_price) }}円</option>
-                                        @else
-                                            <option value="{{ $each_price }}">{{ number_format($each_price) }}円</option>
-                                        @endif
-                                    @endfor                                
-                                </select> 
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary text-white shadow-sm w-100">検索</button>
-                            </div>                                           
-                        </form>
-                    </div>
-                </div>                
+                </div>                               
             </div>
 
             <div class="col">                                                                          
@@ -178,7 +152,7 @@
 
                 <div class="d-flex justify-content-center">
                     {{ $restaurants->appends(request()->query())->links() }}
-                </div>
+                </div>               
             </div>
         </div>
     </div>

@@ -26,8 +26,7 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('admin.home') }}">ホーム</a>
-                            <a class="dropdown-item" href="#">売上集計</a>
+                            <a class="dropdown-item" href="{{ route('admin.home') }}">ホーム</a>                            
                             <a class="dropdown-item" href="{{ route('admin.users.index') }}">会員一覧</a>
                             <a class="dropdown-item" href="{{ route('admin.restaurants.index') }}">店舗一覧</a>
                             <a class="dropdown-item" href="{{ route('admin.categories.index') }}">カテゴリ一覧</a>
@@ -66,6 +65,7 @@
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('admin.users.show', Auth::user()) }}">会員情報</a>
+                                <a class="dropdown-item" href="{{ route('reservations.index') }}">予約一覧</a>
                                 <div class="dropdown-divider"></div>                                
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();

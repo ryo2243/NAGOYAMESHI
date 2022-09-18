@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder {
             RegularHolidaySeeder::class,
             RegularHolidayRestaurantSeeder::class,
             ReviewSeeder::class,
+            ReservationSeeder::class,
         ]);
     }
 }

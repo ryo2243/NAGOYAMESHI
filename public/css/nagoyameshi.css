@@ -204,6 +204,24 @@ a {
   }
 }
 
+/* flatpickrの土曜日の色 */
+.flatpickr-weekday:nth-child(7),
+.flatpickr-days .flatpickr-day:not(.flatpickr-disabled):not(.prevMonthDay):not(.nextMonthDay):nth-child(7n) {
+  color: #0421D9;
+}
+
+/* flatpickrの日曜日の色 */
+.flatpickr-weekday:nth-child(7n + 1),
+.flatpickr-day:not(.flatpickr-disabled):not(.prevMonthDay):not(.nextMonthDay):nth-child(7n + 1) {
+  color: #D90421;
+}
+
+/* flatpickrの選択された日付の色 */
+.flatpickr-day.selected {
+  background: #D95204 !important;
+  border-color: #D95204 !important;
+}
+
 /*
 h1 {  
   font-size: 26px;

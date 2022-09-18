@@ -69,7 +69,7 @@
 
                         <div class="col-md-7">
                             <select class="form-control form-select" id="lowest_price" name="lowest_price">  
-                                <option hidden>選択してください</option>                              
+                                <option value="" hidden>選択してください</option>                              
                                 @for ($i = 0; $i <= ($lowest_price_max - $lowest_price_min) / $price_unit; $i++)
                                     {{ $lowest_price = $lowest_price_min + ($price_unit * $i) }}
                                     @if ($lowest_price == old('lowest_price', $restaurant->lowest_price))                                        
@@ -87,7 +87,7 @@
 
                         <div class="col-md-7">
                             <select class="form-control form-select" id="highest_price" name="highest_price">
-                                <option hidden>選択してください</option>
+                                <option value="" hidden>選択してください</option>
                                 @for ($i = 0; $i <= ($highest_price_max - $highest_price_min) / $price_unit; $i++)
                                     {{ $highest_price = $highest_price_min + ($price_unit * $i) }}
                                     @if ($highest_price == old('highest_price', $restaurant->highest_price))                                        
@@ -121,7 +121,7 @@
 
                         <div class="col-md-7">
                             <select class="form-control form-select" id="opening_time" name="opening_time">
-                                <option hidden>選択してください</option>
+                                <option value="" hidden>選択してください</option>
                                 @for ($i = $opening_time_start * (60 / $time_unit); $i < $opening_time_end * (60 / $time_unit); $i++)
                                     {{ $opening_time = date('H:i', strtotime('00:00 +' . $i * $time_unit .' minute')) }}
                                     @if ($opening_time == old('opening_time', date('H:i', strtotime($restaurant->opening_time))))
@@ -139,7 +139,7 @@
 
                         <div class="col-md-7">
                             <select class="form-control form-select" id="closing_time" name="closing_time">
-                                <option hidden>選択してください</option>
+                                <option value="" hidden>選択してください</option>
                                 @for ($i = $closing_time_start * (60 / $time_unit); $i < $closing_time_end * (60 / $time_unit); $i++)
                                     {{ $closing_time = date('H:i', strtotime('00:00 +' . $i * $time_unit .' minute')) }}
                                     @if ($closing_time == old('closing_time', date('H:i', strtotime($restaurant->closing_time))))
