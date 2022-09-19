@@ -17,7 +17,7 @@ class CategoryRestaurantSeeder extends Seeder {
     public function run() {
         $restaurants = Restaurant::all();
         $categories = Category::all();
-        $number_of_categories = Category::count();
+        $number_of_categories = Category::count() - 1;
 
         foreach ($restaurants as $restaurant) {
             // 設定するカテゴリ数を0～3の間でランダムに決める
@@ -28,7 +28,7 @@ class CategoryRestaurantSeeder extends Seeder {
 
             for ($i = 1; $i <= $total; $i++) {
                 // 設定するカテゴリのidをランダムに決める
-                $random_number = mt_rand(1, $number_of_categories);
+                $random_number = mt_rand(0, $number_of_categories);
                 $category_id = $categories[$random_number]->id;
 
                 // 設定するカテゴリのidを配列の末尾に追加する
