@@ -7,6 +7,7 @@ use App\Http\Controllers\TermController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,10 @@ Route::middleware('verified')->group(function () {
     Route::resource('restaurants.reviews', ReviewController::class)->except('show');
     Route::resource('restaurants.reservations', ReservationController::class)->only(['create', 'store']);
     Route::resource('reservations', ReservationController::class)->only(['index', 'destroy']);
+
+    Route::get('user', [UserController::class, 'index'])->name('user.index');
+    Route::get('user/edit', [UserController::class, 'edit'])->name('user.edit');
+    Route::patch('user', [UserController::class, 'update'])->name('user.update');
 });
 
 // 管理者用のルーティング（ミドルウェアによる認証がコントローラ内で行われているものをグループ化）
