@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Review;
+use App\Models\Restaurant;
+use App\Models\User;
 
 class ReviewSeeder extends Seeder {
     /**
@@ -16,8 +18,8 @@ class ReviewSeeder extends Seeder {
         $review = new Review();
         $review->content = 'とても美味しかったです。また利用させていただきます。';
         $review->score = 5;
-        $review->restaurant_id = 1;
-        $review->user_id = 1;
+        $review->restaurant_id = Restaurant::first()->id;
+        $review->user_id = User::first()->id;
         $review->save();
 
         Review::factory()->count(500)->create();
