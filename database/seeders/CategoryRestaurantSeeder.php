@@ -21,7 +21,7 @@ class CategoryRestaurantSeeder extends Seeder {
 
         foreach ($restaurants as $restaurant) {
             // 設定するカテゴリ数を1～3の間でランダムに決める
-            $total = mt_rand(1, 3);
+            $total = mt_rand(0, 3);
 
             //  設定するカテゴリのidを入れる配列を用意する
             $category_ids = [];

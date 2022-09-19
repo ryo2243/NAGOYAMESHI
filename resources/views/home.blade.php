@@ -188,8 +188,8 @@
                             <div class="card-body">                                    
                                 <h3 class="card-title">{{ $new_restaurant->name }}</h3>
                                 <div class="text-muted small mb-1">
-                                    @if ($highly_rated_restaurant->categories()->exists())
-                                        @foreach ($highly_rated_restaurant->categories as $index => $category)
+                                    @if ($new_restaurant->categories()->exists())
+                                        @foreach ($new_restaurant->categories as $index => $category)
                                             <div class="d-inline-block">
                                                 @if ($index === 0)
                                                     {{ $category->name }}
