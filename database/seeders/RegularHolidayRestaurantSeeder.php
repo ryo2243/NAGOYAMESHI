@@ -28,7 +28,7 @@ class RegularHolidayRestaurantSeeder extends Seeder {
             for ($i = 1; $i <= $total; $i++) {
                 // 設定する定休日のidをランダムに決める
                 $random_number = mt_rand(0, $number_of_regular_holidays);
-                $regular_holiday_id = $regular_holidays[$random_number]->id();
+                $regular_holiday_id = $regular_holidays[$random_number]->id;
 
                 // 設定する定休日のidを配列の末尾に追加する
                 $regular_holiday_ids[] = $regular_holiday_id;
