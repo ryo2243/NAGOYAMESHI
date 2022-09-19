@@ -19,7 +19,7 @@ class UserSeeder extends Seeder {
         $user->kana = 'サムライ タロウ';
         $user->email = 'user@example.com';
         $user->email_verified_at = now();
-        $user->password = Hash::make('password');
+        $user->password = Hash::make('nagoyameshi');
         $user->postal_code = '0000000';
         $user->address = '東京都 港区 マンション';
         $user->phone_number = '09012345678';
