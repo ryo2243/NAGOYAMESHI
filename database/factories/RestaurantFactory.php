@@ -21,7 +21,7 @@ class RestaurantFactory extends Factory {
 
         return [
             'name' => $this->faker->name,
-            'image' => basename('public/dummy.jpg'),
+            'image' => basename('public/restaurants/dummy.jpg'),
             'description' => $this->faker->realText,
             'lowest_price' => $dummy_lowest_price,
             'highest_price' => $dummy_lowest_price + 2000,

@@ -98,7 +98,7 @@ class RestaurantController extends Controller {
         $restaurant = new Restaurant();
         $restaurant->name = $request->input('name');
         if ($request->hasFile('image')) {
-            $image = $request->file('image')->store('public');
+            $image = $request->file('image')->store('public/restaurants');
             $restaurant->image = basename($image);
         } else {
             $restaurant->image = '';
@@ -205,7 +205,7 @@ class RestaurantController extends Controller {
 
         $restaurant->name = $request->input('name');
         if ($request->hasFile('image')) {
-            $image = $request->file('image')->store('public');
+            $image = $request->file('image')->store('public/restaurants');
             $restaurant->image = basename($image);
         }
         $restaurant->description = $request->input('description');
