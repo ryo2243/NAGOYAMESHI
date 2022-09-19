@@ -23,13 +23,13 @@ class DatabaseSeeder extends Seeder {
             AdminSeeder::class,
             RestaurantSeeder::class,
             CategorySeeder::class,
-            CategoryRestaurantSeeder::class,
             CompanySeeder::class,
             TermSeeder::class,
             RegularHolidaySeeder::class,
             RegularHolidayRestaurantSeeder::class,
             ReviewSeeder::class,
             ReservationSeeder::class,
+            CategoryRestaurantSeeder::class,
         ]);
     }
 }
