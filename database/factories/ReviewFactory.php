@@ -16,14 +16,21 @@ class ReviewFactory extends Factory {
      * @return array<string, mixed>
      */
     public function definition() {
+        $restaurants = Restaurant::all();
         $number_of_restaurants = Restaurant::count();
+        $random_number_restaurant = mt_rand(1, $number_of_restaurants);
+        $restaurant_id = $restaurants[$random_number_restaurant]->id;
+
+        $users = User::all();
         $number_of_users = User::count();
+        $random_number_user = mt_rand(1, $number_of_users);
+        $user_id = $users[$random_number_user]->id;
 
         return [
             'content' => $this->faker->realText,
             'score' => mt_rand(1, 5),
-            'restaurant_id' => mt_rand(1, $number_of_restaurants),
-            'user_id' => mt_rand(1, $number_of_users),
+            'restaurant_id' => $restaurant_id,
+            'user_id' => $user_id,
         ];
     }
 }

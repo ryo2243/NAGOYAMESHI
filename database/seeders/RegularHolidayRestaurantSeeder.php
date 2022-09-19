@@ -15,6 +15,7 @@ class RegularHolidayRestaurantSeeder extends Seeder {
      */
     public function run() {
         $restaurants = Restaurant::all();
+        $regular_holidays = RegularHoliday::all();
         $number_of_regular_holidays = RegularHoliday::count();
 
         foreach ($restaurants as $restaurant) {
@@ -26,7 +27,8 @@ class RegularHolidayRestaurantSeeder extends Seeder {
 
             for ($i = 1; $i <= $total; $i++) {
                 // 設定する定休日のidをランダムに決める
-                $regular_holiday_id = mt_rand(1, $number_of_regular_holidays);
+                $random_number = mt_rand(1, $number_of_regular_holidays);
+                $regular_holiday_id = $regular_holidays[$random_number]->id();
 
                 // 設定する定休日のidを配列の末尾に追加する
                 $regular_holiday_ids[] = $regular_holiday_id;
