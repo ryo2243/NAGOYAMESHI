@@ -14,9 +14,19 @@ class ReviewController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index(Restaurant $restaurant) {
-        $reviews = Review::where('restaurant_id', $restaurant->id)->orderBy('created_at', 'desc')->paginate(5);
+        $user = Auth::user();
 
-        return view('reviews.index', compact('restaurant', 'reviews'));
+        // 有料プランに登録しているかどうかで表示件数を分ける
+        if ($user->subscribed('premium_plan')) {
+            $reviews = Review::where('restaurant_id', $restaurant->id)->orderBy('created_at', 'desc')->paginate(5);
+        } else {
+            $reviews = Review::where('restaurant_id', $restaurant->id)->orderBy('created_at', 'desc')->limit(3)->get();
+        }
+
+        // レビュー数が3件を超えているかどうかを判定する変数
+        $over_three = Review::where('restaurant_id', $restaurant->id)->count() > 3;
+
+        return view('reviews.index', compact('restaurant', 'user', 'reviews', 'over_three'));
     }
 
     /**

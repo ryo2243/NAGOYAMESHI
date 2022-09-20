@@ -1,4 +1,4 @@
 *
 !.gitignore
 !restaurants
-!restaurants/dummy.jpg
+!restaurants/*

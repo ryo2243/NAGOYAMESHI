@@ -85,12 +85,22 @@
                     </div>                    
                 @endforeach
 
-                <div class="d-flex justify-content-center">
-                    {{ $reviews->links() }}
-                </div> 
+                <!-- 有料プランに登録していれば表示する -->
+                @if ($user->subscribed('premium_plan')) 
+                    <div class="d-flex justify-content-center">
+                        {{ $reviews->links() }}
+                    </div> 
+                @endif
                 
-                <!-- レビューを投稿済みでなければ表示する -->
-                @if (!$restaurant->reviews()->where('user_id', Auth::id())->exists())
+                <!-- 有料プランに登録しておらず、レビュー数が3件を超えていれば表示する -->
+                @if (!$user->subscribed('premium_plan') && $over_three)
+                    <div class="text-center">
+                        <p>レビューを全件表示するには<a href="{{ route('subscription.create') }}">有料プランへの登録</a>が必要です。</p>
+                    </div>
+                @endif
+                
+                <!-- 有料プランに登録しており、レビューを投稿済みでなければ表示する -->
+                @if ($user->subscribed('premium_plan') && $restaurant->reviews()->where('user_id', Auth::id())->doesntExist())
                     <div class="text-center mt-3">
                         <a href="{{ route('restaurants.reviews.create', $restaurant) }}" class="btn btn-primary text-white shadow-sm w-50">レビューを投稿する</a>                
                     </div>

@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\TermController;
@@ -30,12 +32,37 @@ Route::resource('restaurants', RestaurantController::class)->only(['index', 'sho
 
 Route::middleware('verified')->group(function () {
     Route::resource('restaurants.reviews', ReviewController::class)->except('show');
-    Route::resource('restaurants.reservations', ReservationController::class)->only(['create', 'store']);
+    Route::resource('restaurants.reservations', ReservationController::class)->only(['create', 'store'])->middleware('subscribed');
     Route::resource('reservations', ReservationController::class)->only(['index', 'destroy']);
 
     Route::get('user', [UserController::class, 'index'])->name('user.index');
     Route::get('user/edit', [UserController::class, 'edit'])->name('user.edit');
     Route::patch('user', [UserController::class, 'update'])->name('user.update');
+
+    // サブスク用のルーティング
+    Route::get('subscription', function () {
+        return view('subscription.create', [
+            'intent' => Auth::user()->createSetupIntent()
+        ]);
+    })->name('subscription.create');
+
+    Route::post('subscription', function (Request $request) {
+        $request->user()->newSubscription(
+            'premium_plan',
+            'price_1LcdzfH3mwyalYUk97XO4NdS'
+        )->create($request->paymentMethodId);
+
+        return redirect()->route('home')->with('flash_message', '有料プランへの登録が完了しました。');
+    })->name('subscription.store');
+
+    Route::get('subscription/cancel', function () {
+        return view('subscription.cancel');
+    })->name('subscription.cancel');
+
+    Route::post('subscription/cancel', function () {
+        Auth::user()->subscription('premium_plan')->cancelNow();
+        return redirect()->route('home')->with('flash_message', '有料プランを解約しました。');
+    })->name('subscription.cancel');
 });
 
 // 管理者用のルーティング（ミドルウェアによる認証がコントローラ内で行われているものをグループ化）

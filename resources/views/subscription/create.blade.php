@@ -1,0 +1,62 @@
+@extends('layouts.app')
+
+@push('scripts')
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="{{ asset('/js/stripe.js') }}"></script>
+@endpush
+
+@section('content')
+    <div class="container nagoyameshi-container pb-5">
+        <div class="row justify-content-center">
+            <div class="col-xl-5 col-lg-6 col-md-8">
+                <nav class="my-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0"> 
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}">ホーム</a></li>                                               
+                        <li class="breadcrumb-item active" aria-current="page">有料プラン登録</li>
+                    </ol>
+                </nav> 
+                
+                <h1 class="mb-3 text-center">有料プラン登録</h1>  
+
+                @if (session('subscription_message'))
+                    <div class="alert alert-info" role="alert">
+                        <p class="mb-0">{{ session('subscription_message') }}</p>
+                    </div>
+                @endif    
+                
+                <div class="card mb-4">
+                    <div class="card-header text-center">
+                        有料プランの内容
+                    </div>                  
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">・当日の2時間前までならいつでも予約可能</li>
+                        <li class="list-group-item">・レビューを全件閲覧可能</li>
+                        <li class="list-group-item">・レビューを投稿可能</li>
+                        <li class="list-group-item">・月額たったの300円</li>
+                    </ul>
+                </div>                
+
+                <hr class="mb-4">                
+
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif  
+
+                <form id="cardForm" action="{{ route('subscription.store') }}" method="post">
+                    @csrf
+                    <input class="card-holder-name mb-3" id="cardHolderName" type="text" placeholder="カード名義人">
+                    <div class="card-element mb-4" id="cardElement"></div>
+                    <div class="form-group d-flex justify-content-center">
+                        <button class="btn btn-primary text-white shadow-sm w-50" id="cardButton" data-secret="{{ $intent->client_secret }}">登録</button>
+                    </div>        
+                </form>                            
+            </div>                          
+        </div>
+    </div>       
+@endsection

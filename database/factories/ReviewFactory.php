@@ -27,7 +27,7 @@ class ReviewFactory extends Factory {
         $user_id = $users[$random_number_user]->id;
 
         return [
-            'content' => $this->faker->realText,
+            'content' => '名古屋では有名な格安で焼肉食べ放題のお店。タイミングよく仕事で行く機会があったので、地元の友人と一緒に来店しました。店内は広くゆったりとできます。',
             'score' => mt_rand(1, 5),
             'restaurant_id' => $restaurant_id,
             'user_id' => $user_id,

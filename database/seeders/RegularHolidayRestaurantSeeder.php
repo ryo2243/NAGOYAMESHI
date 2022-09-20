@@ -19,8 +19,8 @@ class RegularHolidayRestaurantSeeder extends Seeder {
         $number_of_regular_holidays = RegularHoliday::count() - 1;
 
         foreach ($restaurants as $restaurant) {
-            // 設定する定休日の数を0～定休日データの数の間でランダムに決める
-            $total = mt_rand(0, $number_of_regular_holidays);
+            // 設定する定休日の数を0～3の間でランダムに決める
+            $total = mt_rand(0, 3);
 
             //  設定する定休日のidを入れる配列を用意する
             $regular_holiday_ids = [];
