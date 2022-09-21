@@ -10,7 +10,7 @@ use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserController;
-use Laravel\Cashier\Cashier;
+use App\Http\Controllers\FavoriteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +39,10 @@ Route::middleware('verified')->group(function () {
     Route::get('user', [UserController::class, 'index'])->name('user.index');
     Route::get('user/edit', [UserController::class, 'edit'])->name('user.edit');
     Route::patch('user', [UserController::class, 'update'])->name('user.update');
+
+    Route::get('favorites', [FavoriteController::class, 'index'])->middleware('subscribed')->name('favorites.index');
+    Route::post('favorites/{restaurant_id}', [FavoriteController::class, 'store'])->middleware('subscribed')->name('favorites.store');
+    Route::delete('favorites/{restaurant_id}', [FavoriteController::class, 'destroy'])->middleware('subscribed')->name('favorites.destroy');
 
     // サブスク用のルーティング
     Route::get('subscription', function () {

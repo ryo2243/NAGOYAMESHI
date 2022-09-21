@@ -136,7 +136,7 @@
                         </div>
                     </div>  
                     
-                    <div class="row pb-2 mb-2 border-bottom">
+                    <div class="row pb-2 mb-4 border-bottom">
                         <div class="col-2">
                             <span class="fw-bold">カテゴリ</span>
                         </div>
@@ -156,7 +156,27 @@
                                 <span>未設定</span>
                             @endif
                         </div>
-                    </div>                    
+                    </div> 
+                    
+                    @guest
+                        <form action="{{ route('favorites.store', $restaurant->id) }}" method="post" class="text-center">
+                            @csrf                            
+                            <button type="submit" class="btn btn-primary text-white shadow-sm w-50">♥ お気に入り追加</button>
+                        </form>                     
+                    @else
+                        @if (Auth::user()->favorite_restaurants()->where('restaurant_id', $restaurant->id)->doesntExist()) 
+                            <form action="{{ route('favorites.store', $restaurant->id) }}" method="post" class="text-center">
+                                @csrf                            
+                                <button type="submit" class="btn btn-primary text-white shadow-sm w-50">♥ お気に入り追加</button>
+                            </form>                                            
+                        @else
+                            <form action="{{ route('favorites.destroy', $restaurant->id) }}" method="post" class="text-center">
+                                @csrf     
+                                @method('delete')                       
+                                <button type="submit" class="btn btn-outline-primary shadow-sm w-50 remove-favorite-button">♥ お気に入り解除</button>
+                            </form>
+                        @endif
+                    @endguest
                 </div>                                               
             </div>                          
         </div>

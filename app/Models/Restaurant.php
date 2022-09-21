@@ -26,6 +26,10 @@ class Restaurant extends Model {
         return $this->hasMany(Reservation::class);
     }
 
+    public function favorited_users() {
+        return $this->belongsToMany(User::class)->as('favorite')->withTimestamps();
+    }
+
     public $sortable = ['created_at'];
 
     // Sortableにおける独自のクエリ

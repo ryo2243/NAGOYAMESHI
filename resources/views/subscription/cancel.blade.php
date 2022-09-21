@@ -21,6 +21,7 @@
                     </div>                  
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">・当日の2時間前までならいつでも予約可能</li>
+                        <li class="list-group-item">・店舗をお好きなだけお気に入りに追加可能</li>
                         <li class="list-group-item">・レビューを全件閲覧可能</li>
                         <li class="list-group-item">・レビューを投稿可能</li>
                         <li class="list-group-item">・月額たったの300円</li>
