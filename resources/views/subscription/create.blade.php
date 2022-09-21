@@ -51,11 +51,11 @@
                 <form id="card-form" action="{{ route('subscription.store') }}" method="post">
                     @csrf
                     <input class="card-holder-name mb-3" id="card-holder-name" type="text" placeholder="カード名義人" required>
-                    <div class="card-element mb-4" id="card-element"></div>
-                    <div class="form-group d-flex justify-content-center">
-                        <button class="btn btn-primary text-white shadow-sm w-50" id="card-button" data-secret="{{ $intent->client_secret }}">登録</button>
-                    </div>        
+                    <div class="card-element mb-4" id="card-element"></div>      
                 </form>                            
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn-primary text-white shadow-sm w-50" id="card-button" data-secret="{{ $intent->client_secret }}">登録</button>
+                </div>                  
             </div>                          
         </div>
     </div>       

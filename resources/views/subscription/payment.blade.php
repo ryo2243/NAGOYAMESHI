@@ -16,7 +16,7 @@
                     </ol>
                 </nav> 
                 
-                <h1 class="mb-3 text-center">お支払い方法</h1>  
+                <h1 class="mb-3 text-center" id="test">お支払い方法</h1>  
                 
                 <div class="container mb-4">
                     <div class="row pb-2 mb-2 border-bottom">
@@ -53,11 +53,11 @@
                 <form id="card-form" action="{{ route('subscription.updatePayment') }}" method="post">
                     @csrf                
                     <input type="text" class="card-holder-name mb-3" id="card-holder-name" placeholder="カード名義人" required>
-                    <div class="card-element mb-4" id="card-element"></div>
-                    <div class="form-group d-flex justify-content-center">
-                        <button class="btn btn-primary text-white shadow-sm w-50" id="card-button" data-secret="{{ $intent->client_secret }}">変更</button>
-                    </div>        
+                    <div class="card-element mb-4" id="card-element"></div>      
                 </form>                          
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn-primary text-white shadow-sm w-50" id="card-button" data-secret="{{ $intent->client_secret }}">変更</button>
+                </div>  
             </div>                          
         </div>
     </div>       
