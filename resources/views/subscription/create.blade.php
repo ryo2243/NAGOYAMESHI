@@ -48,12 +48,12 @@
                     </div>
                 @endif  
 
-                <form id="cardForm" action="{{ route('subscription.store') }}" method="post">
+                <form id="card-form" action="{{ route('subscription.store') }}" method="post">
                     @csrf
-                    <input class="card-holder-name mb-3" id="cardHolderName" type="text" placeholder="カード名義人">
-                    <div class="card-element mb-4" id="cardElement"></div>
+                    <input class="card-holder-name mb-3" id="card-holder-name" type="text" placeholder="カード名義人" required>
+                    <div class="card-element mb-4" id="card-element"></div>
                     <div class="form-group d-flex justify-content-center">
-                        <button class="btn btn-primary text-white shadow-sm w-50" id="cardButton" data-secret="{{ $intent->client_secret }}">登録</button>
+                        <button class="btn btn-primary text-white shadow-sm w-50" id="card-button" data-secret="{{ $intent->client_secret }}">登録</button>
                     </div>        
                 </form>                            
             </div>                          

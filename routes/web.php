@@ -10,6 +10,7 @@ use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserController;
+use Laravel\Cashier\Cashier;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,19 @@ Route::middleware('verified')->group(function () {
 
         return redirect()->route('home')->with('flash_message', '有料プランへの登録が完了しました。');
     })->name('subscription.store');
+
+    Route::get('subscription/payment', function () {
+        return view('subscription.payment', [
+            'user' => Auth::user(),
+            'intent' => Auth::user()->createSetupIntent()
+        ]);
+    })->name('subscription.payment');
+
+    Route::post('subscription/payment', function (Request $request) {
+        $request->user()->updateDefaultPaymentMethod($request->paymentMethodId);
+
+        return redirect()->route('home')->with('flash_message', 'お支払い方法を変更しました。');
+    })->name('subscription.updatePayment');
 
     Route::get('subscription/cancel', function () {
         return view('subscription.cancel');

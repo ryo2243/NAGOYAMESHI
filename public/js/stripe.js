@@ -2,10 +2,10 @@ const stripe = Stripe('pk_test_51Lcdg9H3mwyalYUk46aziPeYiD1r5WzCPaNoo9R13g0s145o
 
 const elements = stripe.elements();
 const cardElement = elements.create('card');
-cardElement.mount('#cardElement');
+cardElement.mount('#card-element');
 
-const cardHolderName = document.getElementById('cardHolderName');
-const cardButton = document.getElementById('cardButton');
+const cardHolderName = document.getElementById('card-holder-name');
+const cardButton = document.getElementById('card-button');
 const clientSecret = cardButton.dataset.secret;
 
 cardButton.addEventListener('click', async (e) => {
@@ -29,7 +29,7 @@ cardButton.addEventListener('click', async (e) => {
 
 function stripePaymentIdHandler(paymentMethodId) {
   // Insert the paymentMethodId into the form so it gets submitted to the server
-  const form = document.getElementById('cardForm');
+  const form = document.getElementById('card-form');
 
   const hiddenInput = document.createElement('input');
   hiddenInput.setAttribute('type', 'hidden');
