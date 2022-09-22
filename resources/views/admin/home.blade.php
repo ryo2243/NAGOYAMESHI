@@ -49,7 +49,7 @@
                         <div class="card bg-light">
                             <div class="card-body text-center">
                                 <h5 class="card-title">月間売上</h5>                                
-                                <p class="card-text">{{ $sales_for_this_month }}円</p>
+                                <p class="card-text">{{ number_format($sales_for_this_month) }}円</p>
                             </div>
                         </div>
                     </div>                                                                     
