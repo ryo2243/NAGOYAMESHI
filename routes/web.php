@@ -87,6 +87,7 @@ Route::middleware('verified')->group(function () {
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('login', [Admin\Auth\LoginController::class, 'showLoginForm'])->name('login');
     Route::post('login', [Admin\Auth\LoginController::class, 'login'])->name('login');
+    Route::post('logout', [Admin\Auth\LoginController::class, 'logout'])->name('logout');
 
     Route::get('/', [Admin\HomeController::class, 'index'])->name('home');
 });

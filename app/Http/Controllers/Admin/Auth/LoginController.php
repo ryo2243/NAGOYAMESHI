@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller {
     /*
@@ -44,5 +45,13 @@ class LoginController extends Controller {
 
     public function showLoginForm() {
         return view('admin.auth.login');
+    }
+
+    public function logout(Request $request) {
+        Auth::guard('admin')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('home')->with('flash_message', 'ログアウトしました。');
     }
 }
