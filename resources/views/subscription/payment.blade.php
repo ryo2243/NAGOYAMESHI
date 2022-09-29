@@ -48,7 +48,11 @@
                             <span>**** **** **** {{ $user->pm_last_four }}</span>
                         </div>
                     </div>
-                </div>                                   
+                </div> 
+                
+                <div class="alert alert-danger card-error" id="card-error" role="alert">
+                    <ul class="mb-0" id="error-list"></ul>                                        
+                </div>                 
 
                 <form id="card-form" action="{{ route('subscription.updatePayment') }}" method="post">
                     @csrf                

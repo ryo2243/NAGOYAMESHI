@@ -241,3 +241,7 @@ a {
   font-family: sans-serif;
   outline: none;
 }
+
+.card-error {
+  display: none;
+}
